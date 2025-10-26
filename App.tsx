@@ -81,7 +81,7 @@ const PrivacyPolicyContent: React.FC = () => {
         <section>
           <h2 className="text-2xl font-semibold text-slate-800 mb-4">7. CONTATO</h2>
           <p>
-            Se tiver alguma dúvida sobre esta Política de Privacidade, entre em contato conosco pelo e-mail: <a href="mailto:contato@afea-rj.org.br" className="text-teal-600 font-medium hover:text-teal-700 underline transition-colors">contato@afea-rj.org.br</a>.
+            Se tiver alguma dúvida sobre esta Política de Privacidade, entre em contato conosco pelo e-mail: <a href="mailto:atendimento@afea-rj.org.br" className="text-teal-600 font-medium hover:text-teal-700 underline transition-colors">atendimento@afea-rj.org.br</a>.
           </p>
         </section>
       </main>
