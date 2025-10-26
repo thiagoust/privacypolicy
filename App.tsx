@@ -8,7 +8,7 @@ const PrivacyPolicyContent: React.FC = () => {
     <div className="max-w-4xl mx-auto bg-white p-8 sm:p-12 rounded-2xl shadow-lg">
       <header className="text-center mb-10 border-b pb-6">
         <h1 className="text-4xl sm:text-5xl font-bold text-slate-800">Política de Privacidade</h1>
-        <p className="text-slate-500 mt-2">Última atualização: 24 de julho de 2024</p>
+        <p className="text-slate-500 mt-2">Última atualização: 26 de outubro de 2026</p>
       </header>
 
       <main className="text-slate-700 leading-relaxed space-y-8">
