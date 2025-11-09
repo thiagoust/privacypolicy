@@ -1,14 +1,19 @@
-
 import React from 'react';
 
 // To keep the App component clean, we define the content component separately.
 // This is good practice even if it's in the same file for a simple app.
 const PrivacyPolicyContent: React.FC = () => {
+  const formattedDate = new Intl.DateTimeFormat('pt-BR', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  }).format(new Date());
+
   return (
     <div className="max-w-4xl mx-auto bg-white p-8 sm:p-12 rounded-2xl shadow-lg">
       <header className="text-center mb-10 border-b pb-6">
         <h1 className="text-4xl sm:text-5xl font-bold text-slate-800">Política de Privacidade</h1>
-        <p className="text-slate-500 mt-2">Última atualização: 26 de outubro de 2026</p>
+        <p className="text-slate-500 mt-2">Última atualização: {formattedDate}</p>
       </header>
 
       <main className="text-slate-700 leading-relaxed space-y-8">
