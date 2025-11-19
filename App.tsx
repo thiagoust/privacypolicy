@@ -77,14 +77,21 @@ const PrivacyPolicyContent: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-2xl font-semibold text-slate-800 mb-4">6. ALTERAÇÕES A ESTA POLÍTICA DE PRIVACIDADE</h2>
+          <h2 className="text-2xl font-semibold text-slate-800 mb-4">6. PRIVACIDADE DE MENORES</h2>
+          <p>
+            O nosso serviço não se destina a menores de 16 anos. Não coletamos intencionalmente informações de identificação pessoal de menores de 16 anos. Se você é pai/mãe ou responsável e sabe que seu filho nos forneceu dados pessoais, entre em contato conosco. Se tomarmos conhecimento de que coletamos dados pessoais de menores de 16 anos sem verificação do consentimento dos pais, tomamos medidas para remover essas informações de nossos servidores.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-semibold text-slate-800 mb-4">7. ALTERAÇÕES A ESTA POLÍTICA DE PRIVACIDADE</h2>
           <p>
             Podemos atualizar esta política de privacidade de tempos em tempos. Notificaremos você sobre quaisquer alterações publicando a nova política de privacidade nesta página. Aconselhamos que você revise esta política periodicamente para quaisquer alterações.
           </p>
         </section>
 
         <section>
-          <h2 className="text-2xl font-semibold text-slate-800 mb-4">7. CONTATO</h2>
+          <h2 className="text-2xl font-semibold text-slate-800 mb-4">8. CONTATO</h2>
           <p>
             Se tiver alguma dúvida sobre esta Política de Privacidade, entre em contato conosco pelo e-mail: <a href="mailto:atendimento@afea-rj.org.br" className="text-teal-600 font-medium hover:text-teal-700 underline transition-colors">atendimento@afea-rj.org.br</a>.
           </p>
