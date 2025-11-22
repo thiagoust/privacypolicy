@@ -3,17 +3,12 @@ import React from 'react';
 // To keep the App component clean, we define the content component separately.
 // This is good practice even if it's in the same file for a simple app.
 const PrivacyPolicyContent: React.FC = () => {
-  const formattedDate = new Intl.DateTimeFormat('pt-BR', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  }).format(new Date());
 
   return (
     <div className="max-w-4xl mx-auto bg-white p-8 sm:p-12 rounded-2xl shadow-lg">
       <header className="text-center mb-10 border-b pb-6">
         <h1 className="text-4xl sm:text-5xl font-bold text-slate-800">Política de Privacidade</h1>
-        <p className="text-slate-500 mt-2">Última atualização: {formattedDate}</p>
+        <p className="mt-2 text-sm text-slate-500">Última atualização: 22 de novembro de 2025</p>
       </header>
 
       <main className="text-slate-700 leading-relaxed space-y-8">
@@ -30,8 +25,8 @@ const PrivacyPolicyContent: React.FC = () => {
           <h2 className="text-2xl font-semibold text-slate-800 mb-4">1. DADOS COLETADOS</h2>
           <div className="space-y-4 pl-4 border-l-4 border-teal-500">
             <div>
-              <h3 className="font-semibold text-slate-700">Informações Fornecidas por Você:</h3>
-              <p>Coletamos informações que você nos fornece diretamente, como quando você cria uma conta, se cadastra para receber nossas newsletters, ou se comunica conosco. Isso pode incluir nome, e-mail, número de telefone e outras informações de contato.</p>
+              <h3 className="font-semibold text-slate-700">Informações de Acesso e Perfil:</h3>
+              <p>As contas de acesso ao portal são pré-criadas pela administração com base nos seus dados de associado(a) já existentes. Para acessar sua conta, você nos fornece suas credenciais de login (matrícula e data de nascimento), que são utilizadas unicamente para verificar sua identidade. Uma vez autenticado, o aplicativo exibe os dados do seu perfil (como nome, categoria, matrícula, data de admissão e foto) que já constam em nosso banco de dados. Não solicitamos informações para a criação de novas contas.</p>
             </div>
             <div>
               <h3 className="font-semibold text-slate-700">Informações Coletadas Automaticamente:</h3>
@@ -44,10 +39,10 @@ const PrivacyPolicyContent: React.FC = () => {
           <h2 className="text-2xl font-semibold text-slate-800 mb-4">2. COMO USAMOS SUAS INFORMAÇÕES</h2>
           <p>Utilizamos as informações que coletamos para diversos fins, incluindo:</p>
           <ul className="list-disc list-inside mt-4 pl-4 space-y-2">
-            <li>Fornecer e gerenciar nossos serviços, incluindo para processar transações e enviar informações relacionadas.</li>
+            <li>Fornecer e gerenciar os serviços do portal, como processar suas solicitações (ex: reservas de churrasqueira) e enviar comunicações sobre o status dessas solicitações.</li>
             <li>Melhorar, personalizar e expandir nossos serviços.</li>
             <li>Entender e analisar como você utiliza nossos serviços.</li>
-            <li>Comunicar com você, seja diretamente ou através de um de nossos parceiros, para fins de atendimento ao cliente, para fornecer atualizações e outras informações sobre o serviço, e para fins de marketing e promocionais.</li>
+            <li>Comunicar com você para fins de atendimento ao cliente e para fornecer atualizações e outras informações essenciais sobre o serviço.</li>
             <li>Para fins de segurança, para prevenir fraudes e proteger nossos usuários.</li>
           </ul>
         </section>
