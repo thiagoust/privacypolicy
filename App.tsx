@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 // To keep the App component clean, we define the content component separately.
@@ -18,6 +19,9 @@ const PrivacyPolicyContent: React.FC = () => {
           </p>
           <p className="mt-4">
             Apenas retemos as informações coletadas pelo tempo necessário para fornecer o serviço solicitado. Quando armazenamos dados, protegemos dentro de meios comercialmente aceitáveis para evitar perdas e roubos, bem como acesso, divulgação, cópia, uso ou modificação não autorizados.
+          </p>
+          <p className="mt-6 font-semibold text-slate-800 bg-teal-50 p-4 rounded-lg border border-teal-200">
+            Ao marcar a caixa de seleção de concordância na tela de login e acessar o portal, você, na qualidade de associado titular, declara ter lido, compreendido e concordado com os termos desta Política de Privacidade, estendendo essa concordância aos seus dependentes cadastrados.
           </p>
         </section>
 
@@ -46,7 +50,7 @@ const PrivacyPolicyContent: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-2xl font-semibold text-slate-800 mb-4">2. COMO USAMOS SUAS INFORMAÇÕES</h2>
+          <h2 className="text-2xl font-semibold text-slate-800 mb-4">2. COMO USAMOS SUAS INFORMAÇÕES E BASES LEGAIS</h2>
           <p>Utilizamos as informações que coletamos para diversos fins, incluindo:</p>
           <ul className="list-disc list-inside mt-4 pl-4 space-y-2">
             <li>Fornecer e gerenciar os serviços do portal, como processar suas solicitações (ex: reservas de churrasqueira) e enviar comunicações sobre o status dessas solicitações.</li>
@@ -55,6 +59,15 @@ const PrivacyPolicyContent: React.FC = () => {
             <li>Comunicar com você para fins de atendimento ao cliente e para fornecer atualizações e outras informações essenciais sobre o serviço.</li>
             <li>Para fins de segurança, para prevenir fraudes e proteger nossos usuários.</li>
           </ul>
+          <div className="mt-6 p-4 bg-slate-50 rounded-lg">
+             <p className="font-semibold text-slate-700">Para sermos transparentes, informamos as bases legais que nos permitem tratar seus dados:</p>
+             <ul className="list-disc list-inside mt-2 pl-4 space-y-2 text-sm">
+                <li><strong>Execução de Contrato:</strong> A maioria dos dados que utilizamos, como seu nome, matrícula e status de associado, são tratados para cumprir com nossas obrigações contratuais com você como membro da AFEA.</li>
+                <li><strong>Consentimento:</strong> Em situações específicas, como o envio de uma nova foto ou a solicitação de uma reserva, tratamos os dados com base no seu consentimento, fornecido na página de login, antes de acessar o aplicativo.</li>
+                <li><strong>Legítimo Interesse:</strong> Utilizamos dados de uso e navegação para melhorar nossos serviços, garantir a segurança e prevenir fraudes, sempre respeitando seus direitos e liberdades.</li>
+                <li><strong>Obrigação Legal:</strong> Podemos tratar seus dados para cumprir com obrigações legais ou regulatórias.</li>
+             </ul>
+          </div>
         </section>
 
         <section>
@@ -75,30 +88,51 @@ const PrivacyPolicyContent: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-2xl font-semibold text-slate-800 mb-4">5. SEUS DIREITOS</h2>
-          <p>
-            Você tem o direito de acessar, corrigir ou excluir suas informações pessoais que mantemos. Para exercer esses direitos, entre em contato conosco através das informações fornecidas abaixo.
+          <h2 className="text-2xl font-semibold text-slate-800 mb-4">5. PERÍODO DE RETENÇÃO DOS DADOS</h2>
+           <p>
+            Seus dados pessoais serão mantidos em nosso sistema enquanto você for um associado ativo da AFEA. Após o seu desligamento da associação, manteremos seus dados armazenados apenas pelos prazos legais necessários para cumprir obrigações fiscais, contábeis ou para defesa em processos judiciais. Após esses períodos, os dados serão eliminados de forma segura ou anonimizados.
           </p>
         </section>
 
         <section>
-          <h2 className="text-2xl font-semibold text-slate-800 mb-4">6. PRIVACIDADE DE MENORES</h2>
+          <h2 className="text-2xl font-semibold text-slate-800 mb-4">6. SEUS DIREITOS COMO TITULAR DOS DADOS</h2>
+          <p>De acordo com a LGPD, você possui diversos direitos em relação aos seus dados, incluindo:</p>
+          <ul className="list-disc list-inside mt-4 pl-4 space-y-2">
+            <li><strong>Confirmação e Acesso:</strong> O direito de saber se tratamos seus dados e de acessá-los.</li>
+            <li><strong>Correção:</strong> O direito de solicitar a correção de dados incompletos, inexatos ou desatualizados.</li>
+            <li><strong>Anonimização, Bloqueio ou Eliminação:</strong> O direito de solicitar a anonimização, bloqueio ou eliminação de dados desnecessários ou tratados em desconformidade com a lei.</li>
+            <li><strong>Informação sobre Compartilhamento:</strong> O direito de saber com quais entidades públicas ou privadas compartilhamos seus dados.</li>
+            <li><strong>Revogação do Consentimento:</strong> O direito de revogar o seu consentimento a qualquer momento.</li>
+          </ul>
+           <p className="mt-4">Para exercer qualquer um desses direitos, entre em contato conosco através do e-mail: <a href="mailto:atendimento@afea-rj.org.br" className="text-teal-600 font-medium hover:text-teal-700 underline transition-colors">atendimento@afea-rj.org.br</a>.</p>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-semibold text-slate-800 mb-4">7. PRIVACIDADE DE MENORES</h2>
           <p>
-            O nosso serviço não se destina a menores de 16 anos. Não coletamos intencionalmente informações de identificação pessoal de menores de 16 anos. Se você é pai/mãe ou responsável e sabe que seu filho nos forneceu dados pessoais, entre em contato conosco. Se tomarmos conhecimento de que coletamos dados pessoais de menores de 16 anos sem verificação do consentimento dos pais, tomamos medidas para remover essas informações de nossos servidores.
+            O acesso direto ao nosso serviço através de login individual é restrito a maiores de 16 anos. Os dados de associados dependentes menores de 16 anos já constam em nosso sistema, sendo cadastrados pela administração no momento da inscrição do titular ou posteriormente a seu pedido, para que possam usufruir das dependências da associação. O aplicativo bloqueia ativamente o login individual para essa faixa etária. Não coletamos informações diretamente de menores, e o acesso às suas informações através do portal é controlado pelo associado titular.
           </p>
         </section>
 
         <section>
-          <h2 className="text-2xl font-semibold text-slate-800 mb-4">7. ALTERAÇÕES A ESTA POLÍTICA DE PRIVACIDADE</h2>
+          <h2 className="text-2xl font-semibold text-slate-800 mb-4">8. ALTERAÇÕES A ESTA POLÍTICA DE PRIVACIDADE</h2>
           <p>
             Podemos atualizar esta política de privacidade de tempos em tempos. Notificaremos você sobre quaisquer alterações publicando a nova política de privacidade nesta página. Aconselhamos que você revise esta política periodicamente para quaisquer alterações.
           </p>
         </section>
 
         <section>
-          <h2 className="text-2xl font-semibold text-slate-800 mb-4">8. CONTATO</h2>
+           <h2 className="text-2xl font-semibold text-slate-800 mb-4">9. CONTROLADOR E ENCARREGADO DE DADOS (DPO)</h2>
+           <div className="space-y-2 text-sm p-4 border-l-4 border-slate-300 bg-slate-50 rounded-r-lg">
+             <p><strong>Controlador de Dados:</strong> A Associação Fluminense de Engenheiros e Arquitetos (AFEA), CNPJ nº 30.136.865/0001-40, com sede na Av. Roberto Silveira, 245 – Icaraí – Niterói- RJ, é a controladora dos seus dados pessoais no âmbito deste serviço.</p>
+             <p><strong>Encarregado pela Proteção de Dados (DPO):</strong> Para qualquer dúvida sobre como seus dados são tratados ou para exercer seus direitos, você pode entrar em contato com nosso Encarregado de Dados através do e-mail: <a href="mailto:atendimento@afea-rj.org.br" className="text-teal-600 font-medium hover:text-teal-700 underline transition-colors">atendimento@afea-rj.org.br</a>.</p>
+           </div>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-semibold text-slate-800 mb-4">10. CONTATO</h2>
           <p>
-            Se tiver alguma dúvida sobre esta Política de Privacidade, entre em contato conosco pelo e-mail: <a href="mailto:atendimento@afea-rj.org.br" className="text-teal-600 font-medium hover:text-teal-700 underline transition-colors">atendimento@afea-rj.org.br</a>.
+            Se tiver alguma outra dúvida sobre esta Política de Privacidade, entre em contato conosco pelo e-mail: <a href="mailto:atendimento@afea-rj.org.br" className="text-teal-600 font-medium hover:text-teal-700 underline transition-colors">atendimento@afea-rj.org.br</a>.
           </p>
         </section>
       </main>
