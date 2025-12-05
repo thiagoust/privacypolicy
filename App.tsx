@@ -42,6 +42,13 @@ const PrivacyPolicyContent: React.FC = () => {
                 O acesso à sua carteira digital e às suas informações é estritamente individual e protegido por suas credenciais de login. Outros associados não têm acesso aos seus dados ou à sua foto.
               </p>
             </div>
+             <div>
+              <h3 className="font-semibold text-slate-700">Solicitação de Cadastro de Dependentes:</h3>
+              <p>O associado titular pode, através do portal, solicitar a inclusão de seus dependentes (cônjuge, filhos, etc.). Este processo requer o fornecimento de dados pessoais do dependente, como nome completo e data de nascimento.</p>
+               <p className="mt-2 text-sm text-slate-600 italic">
+                Ao submeter a solicitação, o associado titular declara ser o responsável legal pelo dependente ou ter obtido o consentimento necessário para compartilhar tais informações com a AFEA. Esses dados serão utilizados exclusivamente para o cadastro do dependente no sistema da associação, permitindo-lhes o acesso e o usufruto dos serviços e instalações, de acordo com o estatuto.
+              </p>
+            </div>
             <div>
               <h3 className="font-semibold text-slate-700">Informações Coletadas Automaticamente:</h3>
               <p>Quando você utiliza nosso aplicativo, podemos coletar automaticamente certas informações, incluindo seu endereço IP, tipo de navegador, sistema operacional, e informações sobre o uso do nosso serviço, como as páginas que você visita.</p>
