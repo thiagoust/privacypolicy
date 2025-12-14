@@ -20,7 +20,7 @@ const PrivacyPolicyContent: React.FC = () => {
             Apenas retemos as informações coletadas pelo tempo necessário para fornecer o serviço solicitado. Quando armazenamos dados, protegemos dentro de meios comercialmente aceitáveis para evitar perdas e roubos, bem como acesso, divulgação, cópia, uso ou modificação não autorizados.
           </p>
           <p className="mt-6 font-semibold text-slate-800 bg-teal-50 p-4 rounded-lg border border-teal-200">
-            Ao marcar a caixa de seleção de concordância na tela de login e acessar o portal, você, na qualidade de associado titular, declara ter lido, compreendido e concordado com os termos desta Política de Privacidade, estendendo essa concordância aos seus dependentes cadastrados.
+            Ao marcar a caixa de seleção de concordância na tela de login e acessar o portal, você, na qualidade de associado titular, declara ter lido, compreendido e concordado com os Termos de Uso e com esta Política de Privacidade, estendendo essa concordância aos seus dependentes cadastrados.
           </p>
         </section>
 
