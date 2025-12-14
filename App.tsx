@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 // To keep the App component clean, we define the content component separately.
@@ -33,6 +32,13 @@ const PrivacyPolicyContent: React.FC = () => {
               <p>As contas de acesso ao portal são pré-criadas pela administração com base nos seus dados de associado(a) já existentes. Para acessar sua conta, você nos fornece suas credenciais de login (matrícula e data de nascimento), que são utilizadas unicamente para verificar sua identidade. Uma vez autenticado, o aplicativo exibe os dados do seu perfil (como nome, categoria, matrícula, data de admissão e foto) que já constam em nosso banco de dados. Não solicitamos informações para a criação de novas contas.</p>
               <p className="mt-2 text-sm text-slate-600 italic">
                 Em caso de divergência na data de nascimento que impeça o seu acesso, o portal oferece uma ferramenta para que você solicite a correção. O associado titular também tem acesso à lista de seus dependentes cadastrados e pode solicitar a correção da data de nascimento dos mesmos. Esta informação é utilizada exclusivamente para a finalidade de autenticação e para diferenciar membros com a mesma matrícula (titulares e dependentes). A data de nascimento não é visível publicamente no portal.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-slate-700">Atualização de Dados de Contato (E-mail e Telefone):</h3>
+              <p>O portal permite que você visualize e atualize diretamente seu endereço de e-mail e número de telefone cadastrados. Essas informações são gerenciadas pelo próprio associado, garantindo agilidade na manutenção dos seus dados de contato.</p>
+              <p className="mt-2 text-sm text-slate-600 italic">
+                Manter seu e-mail e telefone atualizados é essencial para receber notificações sobre reservas, avisos importantes da associação e respostas a solicitações de suporte.
               </p>
             </div>
             <div>
