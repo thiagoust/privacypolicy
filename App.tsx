@@ -98,6 +98,9 @@ const PrivacyPolicyContent: React.FC = () => {
           <p>
             Implementamos medidas de segurança técnicas e organizacionais para proteger suas informações pessoais contra acesso não autorizado, alteração, divulgação ou destruição. No entanto, nenhum sistema de segurança é impenetrável e não podemos garantir a segurança absoluta de suas informações.
           </p>
+          <p className="mt-4">
+            Para reforçar a segurança do seu acesso, nosso sistema implementa uma camada adicional de proteção que vincula o seu dispositivo (celular, tablet ou computador) à sua matrícula. Esse mecanismo impede que um mesmo aparelho seja utilizado para acessar duas contas de associados diferentes, dificultando o compartilhamento de credenciais e o acesso não autorizado.
+          </p>
         </section>
 
         <section>
