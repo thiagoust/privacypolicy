@@ -126,7 +126,7 @@ const PrivacyPolicyContent: React.FC = () => {
         <section>
           <h2 className="text-2xl font-semibold text-slate-800 mb-4">7. PRIVACIDADE DE MENORES</h2>
           <p>
-            O acesso direto ao nosso serviço através de login individual é restrito a maiores de 16 anos. Os dados de associados dependentes menores de 16 anos já constam em nosso sistema, sendo cadastrados pela administração no momento da inscrição do titular ou posteriormente a seu pedido, para que possam usufruir das dependências da associação. O aplicativo bloqueia ativamente o login individual para essa faixa etária. Não coletamos informações diretamente de menores, e o acesso às suas informações através do portal é controlado pelo associado titular.
+            O acesso direto ao nosso serviço através de login individual é restrito a maiores de 12 anos. Os dados de associados dependentes menores de 12 anos já constam em nosso sistema, sendo cadastrados pela administração no momento da inscrição do titular ou posteriormente a seu pedido, para que possam usufruir das dependências da associação. O aplicativo bloqueia ativamente o login individual para essa faixa etária. Não coletamos informações diretamente de menores, e o acesso às suas informações através do portal é controlado pelo associado titular.
           </p>
         </section>
 
