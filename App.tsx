@@ -15,7 +15,6 @@ import {
   Users, 
   FileText,
   Smartphone,
-  ChevronDown,
   Info,
   Download,
   X
@@ -40,12 +39,6 @@ const App: React.FC = () => {
       return () => clearTimeout(timer);
     }
   }, [toast]);
-
-  // States for inline LGPD request generator
-  const [showEmailHelper, setShowEmailHelper] = useState(false);
-  const [requestType, setRequestType] = useState('access');
-  const [userName, setUserName] = useState('');
-  const [userRegistration, setUserRegistration] = useState('');
 
   // States for PDF download modal
   const [showPdfModal, setShowPdfModal] = useState(false);
@@ -427,35 +420,6 @@ const App: React.FC = () => {
       </>
     );
   };
-
-  // Generator for DPO Mail contents
-  const getMailContent = () => {
-    const name = userName.trim() || '[Seu Nome Completo]';
-    const reg = userRegistration.trim() || '[Sua Matrícula]';
-    
-    let subject = '';
-    let body = '';
-
-    switch (requestType) {
-      case 'access':
-        subject = `LGPD: Confirmação e Acesso aos Dados - ${name}`;
-        body = `Prezado Encarregado de Dados (DPO) da AFEA,\n\nCom base nos meus direitos garantidos pela Lei Geral de Proteção de Dados (LGPD), solicito a confirmação de existência de tratamento e o acesso transparente aos meus dados pessoais cadastrados no Portal do Associado.\n\nMeus dados para identificação:\n- Nome Completo: ${name}\n- Matrícula: ${reg}\n\nAguardo retorno dentro do prazo legal.\n\nAtenciosamente,\n${name}`;
-        break;
-      case 'rectify':
-        subject = `LGPD: Correção de Dados Cadastrais - ${name}`;
-        body = `Prezado Encarregado de Dados (DPO) da AFEA,\n\nSolicito a correção de dados desatualizados ou incorretos em meu cadastro de associado.\n\nMeus dados para identificação:\n- Nome Completo: ${name}\n- Matrícula: ${reg}\n\nDados a serem corrigidos (descrever aqui):\n[Insira aqui as informações corretas, ex: Data de nascimento, E-mail ou Telefone]\n\nAtenciosamente,\n${name}`;
-        break;
-      case 'revoke':
-        subject = `LGPD: Revogação de Consentimento de Uso do Portal - ${name}`;
-        body = `Prezado Encarregado de Dados (DPO) da AFEA,\n\nDeclaro que gostaria de revogar o meu consentimento para o tratamento de dados no âmbito do Portal do Associado. Compreendo que esta solicitação resultará no encerramento da minha conta de acesso e na indisponibilidade da minha Carteira Digital do Associado.\n\nMeus dados para identificação:\n- Nome Completo: ${name}\n- Matrícula: ${reg}\n\nAtenciosamente,\n${name}`;
-        break;
-    }
-
-    return { subject, body };
-  };
-
-  const mailInfo = getMailContent();
-  const mailToUrl = `mailto:atendimento@afea-rj.org.br?subject=${encodeURIComponent(mailInfo.subject)}&body=${encodeURIComponent(mailInfo.body)}`;
 
   return (
     <div className="min-h-screen bg-[#f8fafc] text-slate-800 font-sans antialiased selection:bg-teal-600 selection:text-white pb-20">
@@ -919,90 +883,6 @@ const App: React.FC = () => {
                 <Check className="w-4 h-4 text-teal-600 shrink-0 mt-1" />
                 <span><strong>Revogação do Consentimento:</strong> Solicitar a revogação de consentimentos concedidos anteriormente (isso implicará na imediata desativação da sua conta de acesso digital e na indisponibilidade da sua Carteira Digital).</span>
               </div>
-            </div>
-
-            {/* Inlined Elegant LGPD Request Email Tool (instead of a bulky sidebar widget) */}
-            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 sm:p-6 mt-6 space-y-4">
-              <button 
-                onClick={() => setShowEmailHelper(!showEmailHelper)}
-                className="w-full flex items-center justify-between font-bold text-slate-800 text-sm hover:text-teal-700 transition-colors"
-              >
-                <div className="flex items-center gap-2">
-                  <Mail className="w-4.5 h-4.5 text-teal-600" />
-                  <span>Assistente de Envio de Solicitação Legal (DPO)</span>
-                </div>
-                <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-300 ${showEmailHelper ? 'rotate-180' : ''}`} />
-              </button>
-
-              <AnimatePresence>
-                {showEmailHelper && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    className="overflow-hidden space-y-4 pt-4 border-t border-slate-200/60"
-                  >
-                    <p className="text-xs text-slate-500 leading-relaxed">
-                      Preencha os campos abaixo para gerar um e-mail pré-formatado que poderá ser enviado diretamente ao Encarregado de Proteção de Dados (DPO) da AFEA.
-                    </p>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Seu Nome Completo</label>
-                        <input
-                          type="text"
-                          value={userName}
-                          onChange={(e) => setUserName(e.target.value)}
-                          placeholder="Ex: Carlos Eduardo de Souza"
-                          className="w-full text-xs px-3.5 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 focus:outline-hidden transition-all bg-white"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Número de Matrícula</label>
-                        <input
-                          type="text"
-                          value={userRegistration}
-                          onChange={(e) => setUserRegistration(e.target.value)}
-                          placeholder="Ex: 8540-T"
-                          className="w-full text-xs px-3.5 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 focus:outline-hidden transition-all bg-white"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Tipo de Requisição Legal</label>
-                      <select
-                        value={requestType}
-                        onChange={(e) => setRequestType(e.target.value)}
-                        className="w-full text-xs px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 focus:outline-hidden transition-all bg-white text-slate-700 font-medium"
-                      >
-                        <option value="access">Confirmar Existência &amp; Acessar Meus Dados</option>
-                        <option value="rectify">Corrigir Informações Cadastrais Desatualizadas</option>
-                        <option value="revoke">Revogar Meu Consentimento (Encerramento do Portal)</option>
-                      </select>
-                    </div>
-
-                    {/* Compact E-mail Draft Preview */}
-                    <div className="bg-white p-3 border border-slate-200 rounded-xl space-y-1.5 font-mono text-[11px] text-slate-600 max-h-36 overflow-y-auto shadow-2xs">
-                      <div className="border-b pb-1 font-bold text-slate-800">Assunto: <span className="font-normal text-slate-600">{mailInfo.subject}</span></div>
-                      <div className="whitespace-pre-wrap leading-relaxed pt-1">{mailInfo.body}</div>
-                    </div>
-
-                    <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
-                      <p className="text-[10px] text-slate-400 max-w-sm">
-                        O botão ao lado abrirá seu aplicativo de e-mail padrão já preenchido com destinatário <strong className="text-slate-600">atendimento@afea-rj.org.br</strong>.
-                      </p>
-                      <a
-                        href={mailToUrl}
-                        className="w-full sm:w-auto text-center inline-flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs py-2.5 px-5 rounded-xl transition-all shadow-xs cursor-pointer shrink-0"
-                      >
-                        <Mail className="w-3.5 h-3.5" />
-                        <span>Abrir Cliente de E-mail</span>
-                      </a>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
             </div>
           </section>
 
