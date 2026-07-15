@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { 
   ShieldCheck, 
-  Search, 
   Printer, 
   Copy, 
   Check, 
@@ -23,7 +22,6 @@ import { motion, AnimatePresence } from 'motion/react';
 import { jsPDF } from 'jspdf';
 
 const App: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState('');
   const [copied, setCopied] = useState(false);
   
   // States for Toast notification system
@@ -402,23 +400,9 @@ const App: React.FC = () => {
     }
   };
 
-  // Helper to highlight searched terms inside text
+  // Helper to highlight searched terms inside text (returns plain text since search is removed)
   const highlightText = (text: string) => {
-    if (!searchTerm.trim()) return text;
-    const parts = text.split(new RegExp(`(${searchTerm})`, 'gi'));
-    return (
-      <>
-        {parts.map((part, index) => 
-          part.toLowerCase() === searchTerm.toLowerCase() ? (
-            <span key={index} className="bg-emerald-100 text-teal-950 font-semibold px-0.5 rounded">
-              {part}
-            </span>
-          ) : (
-            part
-          )
-        )}
-      </>
-    );
+    return text;
   };
 
   return (
@@ -464,29 +448,8 @@ const App: React.FC = () => {
             </div>
           </div>
 
-          {/* Quick Search & Utilities Grid */}
-          <div className="flex items-center gap-2 bg-slate-50 p-3 rounded-2xl border border-slate-100 mb-6">
-            <div className="relative flex-1">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Search className="h-4 w-4 text-slate-400" />
-              </div>
-              <input
-                type="text"
-                placeholder="Buscar termo na política..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="block w-full pl-9 pr-8 py-2 border border-slate-200 rounded-xl bg-white text-sm text-slate-900 placeholder-slate-400 focus:outline-hidden focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
-              />
-              {searchTerm && (
-                <button 
-                  onClick={() => setSearchTerm('')}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-xs text-slate-400 hover:text-slate-600"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              )}
-            </div>
-
+          {/* Document Utilities Row */}
+          <div className="flex items-center justify-end bg-slate-50 p-3.5 rounded-2xl border border-slate-100 mb-6">
             <div className="flex items-center gap-1.5 shrink-0">
               <button
                 onClick={handleDownloadPdf}
