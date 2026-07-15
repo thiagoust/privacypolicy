@@ -26,8 +26,21 @@ import { jsPDF } from 'jspdf';
 const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [copied, setCopied] = useState(false);
-  const [activeTab, setActiveTab] = useState<'all' | 'cadastral' | 'finalidade' | 'seguranca'>('all');
   
+  // States for Toast notification system
+  const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' | 'info' } | null>(null);
+
+  const showToast = (message: string, type: 'success' | 'error' | 'info' = 'success') => {
+    setToast({ message, type });
+  };
+
+  useEffect(() => {
+    if (toast) {
+      const timer = setTimeout(() => setToast(null), 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [toast]);
+
   // States for inline LGPD request generator
   const [showEmailHelper, setShowEmailHelper] = useState(false);
   const [requestType, setRequestType] = useState('access');
@@ -39,18 +52,51 @@ const App: React.FC = () => {
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
 
   const handleCopyLink = () => {
-    navigator.clipboard.writeText(window.location.href);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(window.location.href);
+        setCopied(true);
+        showToast('Link de compartilhamento copiado!', 'success');
+        setTimeout(() => setCopied(false), 2000);
+      } else {
+        throw new Error('Clipboard API not available');
+      }
+    } catch (e) {
+      // Fallback copy implementation
+      const textArea = document.createElement('textarea');
+      textArea.value = window.location.href;
+      // Style to hide the textarea
+      textArea.style.position = 'fixed';
+      textArea.style.top = '0';
+      textArea.style.left = '0';
+      textArea.style.width = '2em';
+      textArea.style.height = '2em';
+      textArea.style.padding = '0';
+      textArea.style.border = 'none';
+      textArea.style.outline = 'none';
+      textArea.style.boxShadow = 'none';
+      textArea.style.background = 'transparent';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+          setCopied(true);
+          showToast('Link de compartilhamento copiado!', 'success');
+          setTimeout(() => setCopied(false), 2000);
+        } else {
+          showToast('Copie o endereço diretamente da barra do seu navegador.', 'info');
+        }
+      } catch (err) {
+        showToast('Copie o endereço diretamente da barra do seu navegador.', 'info');
+      }
+      document.body.removeChild(textArea);
+    }
   };
 
   const handlePrint = () => {
-    const currentTab = activeTab;
-    setActiveTab('all');
-    setTimeout(() => {
-      window.print();
-      setActiveTab(currentTab);
-    }, 150);
+    window.print();
   };
 
   const handleDownloadPdf = () => {
@@ -325,7 +371,7 @@ const App: React.FC = () => {
             doc.setFont('helvetica', 'normal');
             doc.setFontSize(9);
             doc.setTextColor(71, 85, 105); // slate-600
-            const fullBulletText = `• ${bullet}`;
+            const fullBulletText = `- ${bullet}`;
             const splitBullet = doc.splitTextToSize(fullBulletText, printableWidth - 6);
             const bulletHeight = splitBullet.length * 4;
             checkPageOverflow(bulletHeight + 3);
@@ -354,9 +400,10 @@ const App: React.FC = () => {
 
       // Save
       doc.save('Politica_de_Privacidade_AFEA.pdf');
+      showToast('PDF gerado e baixado com sucesso!', 'success');
     } catch (error) {
       console.error('Error generating PDF:', error);
-      alert('Erro ao gerar o PDF. Por favor, tente novamente.');
+      showToast('Erro ao gerar PDF. Se estiver em visualizador integrado, por favor clique no botão "Abrir em Nova Aba" no topo do portal.', 'error');
     } finally {
       setIsGeneratingPdf(false);
     }
@@ -454,123 +501,69 @@ const App: React.FC = () => {
           </div>
 
           {/* Quick Search & Utilities Grid */}
-          <div className="flex flex-col sm:flex-row items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100 mb-6">
-            <div className="relative w-full">
-              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                <Search className="h-4.5 w-4.5 text-slate-400" />
+          <div className="flex items-center gap-2 bg-slate-50 p-3 rounded-2xl border border-slate-100 mb-6">
+            <div className="relative flex-1">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <Search className="h-4 w-4 text-slate-400" />
               </div>
               <input
                 type="text"
-                placeholder="Filtrar ou buscar termo nesta política..."
+                placeholder="Buscar termo na política..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="block w-full pl-10 pr-10 py-2.5 border border-slate-200 rounded-xl bg-white text-sm text-slate-900 placeholder-slate-400 focus:outline-hidden focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
+                className="block w-full pl-9 pr-8 py-2 border border-slate-200 rounded-xl bg-white text-sm text-slate-900 placeholder-slate-400 focus:outline-hidden focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
               />
               {searchTerm && (
                 <button 
                   onClick={() => setSearchTerm('')}
-                  className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-xs text-slate-400 hover:text-slate-600 font-medium"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-xs text-slate-400 hover:text-slate-600"
                 >
-                  Limpar
+                  <X className="w-4 h-4" />
                 </button>
               )}
             </div>
 
-            <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 shrink-0 w-full sm:w-auto">
+            <div className="flex items-center gap-1.5 shrink-0">
               <button
                 onClick={handleDownloadPdf}
                 disabled={isGeneratingPdf}
-                className={`w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold transition-all shrink-0 ${
+                title="Baixar PDF"
+                className={`w-9 h-9 flex items-center justify-center rounded-xl transition-all shrink-0 ${
                   isGeneratingPdf 
-                    ? 'bg-teal-850 text-teal-200 cursor-not-allowed opacity-80' 
-                    : 'bg-teal-600 border border-teal-700 text-white hover:bg-teal-700 cursor-pointer shadow-xs'
+                    ? 'bg-teal-100 text-teal-400 cursor-not-allowed' 
+                    : 'bg-teal-50 hover:bg-teal-100 text-teal-700 border border-teal-100 cursor-pointer'
                 }`}
               >
                 {isGeneratingPdf ? (
-                  <>
-                    <svg className="animate-spin h-4 w-4 text-teal-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    <span>Gerando...</span>
-                  </>
+                  <svg className="animate-spin h-4 w-4 text-teal-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
                 ) : (
-                  <>
-                    <Download className="w-4 h-4 text-white" />
-                    <span>Baixar PDF</span>
-                  </>
+                  <Download className="w-4 h-4" />
                 )}
               </button>
 
               <button
                 onClick={handlePrint}
-                className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2.5 bg-white border border-slate-200 text-slate-700 rounded-xl text-sm font-medium hover:bg-slate-50 hover:text-slate-900 transition-all cursor-pointer shadow-2xs shrink-0"
+                title="Imprimir"
+                className="w-9 h-9 flex items-center justify-center bg-white hover:bg-slate-50 text-slate-600 rounded-xl border border-slate-200 transition-all cursor-pointer shrink-0"
               >
-                <Printer className="w-4 h-4 text-slate-500" />
-                <span>Imprimir</span>
+                <Printer className="w-4 h-4" />
               </button>
 
               <button
                 onClick={handleCopyLink}
-                className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2.5 bg-white border border-slate-200 text-slate-700 rounded-xl text-sm font-medium hover:bg-slate-50 hover:text-slate-900 transition-all relative cursor-pointer shadow-2xs shrink-0"
+                title={copied ? "Copiado!" : "Compartilhar link"}
+                className="w-9 h-9 flex items-center justify-center bg-white hover:bg-slate-50 text-slate-600 rounded-xl border border-slate-200 transition-all relative cursor-pointer shrink-0"
               >
                 {copied ? (
-                  <>
-                    <Check className="w-4 h-4 text-emerald-600" />
-                    <span className="text-emerald-600 font-semibold">Copiado!</span>
-                  </>
+                  <Check className="w-4 h-4 text-emerald-600" />
                 ) : (
-                  <>
-                    <Copy className="w-4 h-4 text-slate-500" />
-                    <span>Compartilhar</span>
-                  </>
+                  <Copy className="w-4 h-4" />
                 )}
               </button>
             </div>
-          </div>
-
-          {/* Quick Categories Filter Tab */}
-          <div className="flex flex-wrap gap-1.5 border-b border-slate-100 pb-4">
-            <button
-              onClick={() => setActiveTab('all')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                activeTab === 'all' 
-                  ? 'bg-teal-600 text-white' 
-                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-              }`}
-            >
-              Exibir Tudo
-            </button>
-            <button
-              onClick={() => setActiveTab('cadastral')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                activeTab === 'cadastral' 
-                  ? 'bg-teal-600 text-white' 
-                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-              }`}
-            >
-              1. Dados Coletados
-            </button>
-            <button
-              onClick={() => setActiveTab('finalidade')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                activeTab === 'finalidade' 
-                  ? 'bg-teal-600 text-white' 
-                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-              }`}
-            >
-              2. Finalidade &amp; Bases Legais
-            </button>
-            <button
-              onClick={() => setActiveTab('seguranca')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                activeTab === 'seguranca' 
-                  ? 'bg-teal-600 text-white' 
-                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-              }`}
-            >
-              4. Segurança &amp; Armazenamento
-            </button>
           </div>
 
           {/* Introduction & Welcome Text */}
@@ -607,18 +600,11 @@ const App: React.FC = () => {
         <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-xs space-y-12">
           
           {/* Section 1: Informações Coletadas */}
-          <AnimatePresence mode="popLayout">
-            {(activeTab === 'all' || activeTab === 'cadastral') && (
-              <motion.section 
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="space-y-6"
-              >
-                <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
-                  <div className="bg-teal-50 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm">1</div>
-                  <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">1. Informações que Coletamos</h2>
-                </div>
+          <section className="space-y-6">
+            <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
+              <div className="bg-teal-50 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm">1</div>
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Informações que Coletamos</h2>
+            </div>
 
                 <p className="text-slate-600 text-sm">
                   {highlightText(
@@ -721,23 +707,14 @@ const App: React.FC = () => {
                   </div>
 
                 </div>
-              </motion.section>
-            )}
-          </AnimatePresence>
+              </section>
 
           {/* Section 2: Finalidade do Tratamento & Bases Legais */}
-          <AnimatePresence mode="popLayout">
-            {(activeTab === 'all' || activeTab === 'finalidade') && (
-              <motion.section 
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="space-y-6"
-              >
-                <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
-                  <div className="bg-teal-50 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm">2</div>
-                  <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">2. Finalidade do Tratamento de Dados &amp; Bases Legais</h2>
-                </div>
+          <section className="space-y-6">
+            <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
+              <div className="bg-teal-50 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm">2</div>
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Finalidade do Tratamento de Dados &amp; Bases Legais</h2>
+            </div>
 
                 <p className="text-slate-600 text-sm">
                   {highlightText(
@@ -824,23 +801,14 @@ const App: React.FC = () => {
                     </div>
                   </div>
                 </div>
-              </motion.section>
-            )}
-          </AnimatePresence>
+              </section>
 
           {/* Section 3: Compartilhamento e Armazenamento dos Dados */}
-          <AnimatePresence mode="popLayout">
-            {(activeTab === 'all' || activeTab === 'seguranca') && (
-              <motion.section 
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="space-y-6"
-              >
-                <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
-                  <div className="bg-teal-50 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm">3</div>
-                  <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">3. Compartilhamento e Armazenamento dos Dados</h2>
-                </div>
+          <section className="space-y-6">
+            <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
+              <div className="bg-teal-50 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm">3</div>
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Compartilhamento e Armazenamento dos Dados</h2>
+            </div>
 
                 <p className="text-slate-700 leading-relaxed text-sm">
                   {highlightText(
@@ -882,23 +850,14 @@ const App: React.FC = () => {
                     </p>
                   </div>
                 </div>
-              </motion.section>
-            )}
-          </AnimatePresence>
+              </section>
 
           {/* Section 4: Segurança da Informação */}
-          <AnimatePresence mode="popLayout">
-            {(activeTab === 'all' || activeTab === 'seguranca') && (
-              <motion.section 
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="space-y-6"
-              >
-                <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
-                  <div className="bg-teal-50 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm">4</div>
-                  <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">4. Segurança da Informação</h2>
-                </div>
+          <section className="space-y-6">
+            <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
+              <div className="bg-teal-50 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm">4</div>
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Segurança da Informação</h2>
+            </div>
 
                 <p className="text-slate-700 leading-relaxed text-sm">
                   {highlightText(
@@ -924,15 +883,13 @@ const App: React.FC = () => {
                     <span>Bloqueio de logins simultâneos em aparelhos não autorizados</span>
                   </div>
                 </div>
-              </motion.section>
-            )}
-          </AnimatePresence>
+              </section>
 
           {/* Section 5: Seus Direitos (LGPD) */}
           <section className="space-y-6">
             <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
               <div className="bg-teal-50 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm">5</div>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">5. Seus Direitos (LGPD)</h2>
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Seus Direitos (LGPD)</h2>
             </div>
 
             <p className="text-slate-700 leading-relaxed text-sm">
@@ -1053,7 +1010,7 @@ const App: React.FC = () => {
           <section className="space-y-4">
             <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
               <div className="bg-teal-50 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm">6</div>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">6. Retenção de Dados</h2>
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Retenção de Dados</h2>
             </div>
             <p className="text-slate-700 leading-relaxed text-sm">
               {highlightText(
@@ -1066,7 +1023,7 @@ const App: React.FC = () => {
           <section className="space-y-4">
             <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
               <div className="bg-teal-50 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm">7</div>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">7. Privacidade de Menores</h2>
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Privacidade de Menores</h2>
             </div>
             <p className="text-slate-700 leading-relaxed text-sm">
               {highlightText(
@@ -1079,7 +1036,7 @@ const App: React.FC = () => {
           <section className="space-y-4">
             <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
               <div className="bg-teal-50 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm">8</div>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">8. Alterações a esta Política de Privacidade</h2>
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Alterações a esta Política de Privacidade</h2>
             </div>
             <p className="text-slate-700 leading-relaxed text-sm">
               {highlightText(
@@ -1092,7 +1049,7 @@ const App: React.FC = () => {
           <section className="space-y-6">
             <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
               <div className="bg-teal-50 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm">9</div>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">9. Controlador e Encarregado de Dados (DPO)</h2>
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Controlador e Encarregado de Dados (DPO)</h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1125,8 +1082,11 @@ const App: React.FC = () => {
           </section>
 
           {/* Section 10: Contato */}
-          <section className="space-y-4 pt-4 border-t border-slate-100">
-            <h3 className="text-lg font-bold text-slate-900 tracking-tight">10. Contato Geral</h3>
+          <section className="space-y-6 pt-4 border-t border-slate-100">
+            <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
+              <div className="bg-teal-50 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm">10</div>
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Contato Geral</h2>
+            </div>
             <p className="text-slate-700 leading-relaxed text-sm">
               Se você tiver qualquer outra dúvida sobre esta Política de Privacidade ou sobre as práticas adotadas no Portal do Associado, fale conosco pelo canal oficial de suporte administrativo: <a href="mailto:atendimento@afea-rj.org.br" className="text-teal-600 font-semibold hover:text-teal-700 underline transition-colors">atendimento@afea-rj.org.br</a>.
             </p>
@@ -1236,6 +1196,41 @@ const App: React.FC = () => {
               </div>
             </motion.div>
           </div>
+        )}
+      </AnimatePresence>
+
+      {/* Floating Toast Notification */}
+      <AnimatePresence>
+        {toast && (
+          <motion.div
+            initial={{ opacity: 0, y: 50, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            className="fixed bottom-6 right-6 z-50 max-w-sm w-full bg-slate-900 text-white rounded-2xl shadow-xl border border-slate-800 p-4 flex items-center gap-3"
+          >
+            {toast.type === 'success' && (
+              <div className="bg-emerald-500/20 text-emerald-400 p-1.5 rounded-lg">
+                <Check className="w-5 h-5" />
+              </div>
+            )}
+            {toast.type === 'error' && (
+              <div className="bg-rose-500/20 text-rose-400 p-1.5 rounded-lg">
+                <ShieldAlert className="w-5 h-5" />
+              </div>
+            )}
+            {toast.type === 'info' && (
+              <div className="bg-teal-500/20 text-teal-400 p-1.5 rounded-lg">
+                <Info className="w-5 h-5" />
+              </div>
+            )}
+            <p className="text-xs sm:text-sm font-medium flex-1">{toast.message}</p>
+            <button 
+              onClick={() => setToast(null)}
+              className="text-slate-400 hover:text-slate-200 transition-colors p-1"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </motion.div>
         )}
       </AnimatePresence>
 

@@ -1,5 +1,6 @@
 {
   "name": "Privacy Policy Page",
   "description": "A web page displaying a privacy policy, with a design inspired by the AFEA-RJ associate portal.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
