@@ -21,6 +21,7 @@ import {
   X
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { jsPDF } from 'jspdf';
 
 const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -35,6 +36,7 @@ const App: React.FC = () => {
 
   // States for PDF download modal
   const [showPdfModal, setShowPdfModal] = useState(false);
+  const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -57,12 +59,307 @@ const App: React.FC = () => {
 
   const handleConfirmDownloadPdf = () => {
     setShowPdfModal(false);
-    const currentTab = activeTab;
-    setActiveTab('all');
-    setTimeout(() => {
-      window.print();
-      setActiveTab(currentTab);
-    }, 150);
+    setIsGeneratingPdf(true);
+    try {
+      const doc = new jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: 'a4'
+      });
+
+      let posY = 20;
+      const marginX = 20;
+      const pageWidth = 210;
+      const pageHeight = 297;
+      const printableWidth = pageWidth - (2 * marginX);
+      let pageNum = 1;
+
+      // Helper to check for page overflow
+      const checkPageOverflow = (neededHeight: number) => {
+        if (posY + neededHeight > pageHeight - 20) {
+          drawFooter();
+          doc.addPage();
+          pageNum++;
+          posY = 20;
+          drawHeader();
+        }
+      };
+
+      // Header drawing function for subsequent pages
+      const drawHeader = () => {
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(8);
+        doc.setTextColor(148, 163, 184); // slate-400
+        doc.text('POLÍTICA DE PRIVACIDADE - PORTAL DO ASSOCIADO AFEA', marginX, 12);
+        doc.setDrawColor(226, 232, 240); // slate-200
+        doc.setLineWidth(0.2);
+        doc.line(marginX, 14, pageWidth - marginX, 14);
+        posY = 22;
+      };
+
+      // Footer drawing function for all pages
+      const drawFooter = () => {
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(8);
+        doc.setTextColor(148, 163, 184); // slate-400
+        doc.setDrawColor(226, 232, 240); // slate-200
+        doc.setLineWidth(0.2);
+        doc.line(marginX, pageHeight - 15, pageWidth - marginX, pageHeight - 15);
+        doc.text('Associação Fluminense de Engenheiros e Arquitetos - CNPJ 30.136.865/0001-40', marginX, pageHeight - 10);
+        doc.text(`Página ${pageNum}`, pageWidth - marginX - 15, pageHeight - 10);
+      };
+
+      // Title / Cover section (only on page 1)
+      doc.setFillColor(13, 148, 136); // teal-600
+      doc.rect(0, 0, pageWidth, 6, 'F');
+
+      // Brand Name
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(10);
+      doc.setTextColor(13, 148, 136); // teal-600
+      doc.text('AFEA - DOCUMENTO OFICIAL', marginX, 16);
+
+      doc.setFontSize(22);
+      doc.setTextColor(15, 23, 42); // slate-900
+      doc.text('Política de Privacidade', marginX, 26);
+
+      doc.setFontSize(12);
+      doc.setTextColor(100, 116, 139); // slate-500
+      doc.text('Portal do Associado & Carteira Digital', marginX, 33);
+
+      // Version box
+      doc.setFillColor(241, 245, 249); // slate-100
+      doc.rect(marginX, 38, printableWidth, 16, 'F');
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.setTextColor(15, 23, 42); // slate-900
+      doc.text('Última Atualização:', marginX + 4, 44);
+      doc.setFont('helvetica', 'normal');
+      doc.text('14 de julho de 2026', marginX + 38, 44);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Versão:', marginX + 4, 50);
+      doc.setFont('helvetica', 'normal');
+      doc.text('2.0 (Unificada LGPD)', marginX + 18, 50);
+
+      posY = 64;
+
+      // Introduction text
+      const introParagraphs = [
+        "A Associação Fluminense de Engenheiros e Arquitetos (AFEA), CNPJ nº 30.136.865/0001-40, com sede na Av. Roberto Silveira, 245 – Icaraí – Niterói - RJ, valoriza a privacidade e a segurança das informações de seus associados. Esta Política de Privacidade descreve como coletamos, usamos, armazenamos e protegemos os seus dados pessoais no âmbito do Portal do Associado e na emissão da Carteira Digital do Associado.",
+        "A sua privacidade é importante para nós. É política do nosso aplicativo respeitar a sua privacidade em relação a qualquer informação sua que possamos coletar. Solicitamos informações pessoais apenas quando realmente precisamos delas para lhe fornecer um serviço. Fazemo-lo por meios justos e legais, com o seu conhecimento e consentimento. Também informamos por que estamos coletando e como será usado.",
+        "Apenas retemos as informações coletadas pelo tempo necessário para fornecer o serviço solicitado. Quando armazenamos dados, protegemos dentro de meios comercialmente aceitáveis para evitar perdas e roubos, bem como acesso, divulgação, cópia, uso ou modificação não autorizados."
+      ];
+
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(10);
+      doc.setTextColor(51, 65, 85); // slate-700
+
+      introParagraphs.forEach(para => {
+        const splitPara = doc.splitTextToSize(para, printableWidth);
+        const height = splitPara.length * 5;
+        checkPageOverflow(height + 6);
+        doc.text(splitPara, marginX, posY);
+        posY += height + 6;
+      });
+
+      // Accept Electronic Alert Box
+      const acceptAlertText = "Aceite Eletrônico & Vinculação Legal: Ao marcar a caixa de seleção de concordância na tela de login e acessar o portal, você, na qualidade de associado titular, declara ter lido, compreendido e concordado com os Termos de Uso e com esta Política de Privacidade, estendendo essa concordância aos seus dependentes cadastrados.";
+      const splitAlert = doc.splitTextToSize(acceptAlertText, printableWidth - 8);
+      const alertHeight = splitAlert.length * 4.5 + 8;
+      checkPageOverflow(alertHeight + 10);
+
+      doc.setFillColor(240, 253, 250); // teal-50
+      doc.setDrawColor(204, 251, 241); // teal-100
+      doc.setLineWidth(0.3);
+      doc.rect(marginX, posY, printableWidth, alertHeight, 'FD');
+
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.setTextColor(17, 94, 89); // teal-800
+      doc.text(splitAlert, marginX + 4, posY + 6);
+      posY += alertHeight + 10;
+
+      // --- SECTIONS ---
+      const sections = [
+        {
+          title: "1. Informações que Coletamos",
+          intro: "Para fornecer os serviços do portal e emitir a Carteira Digital do Associado, coletamos e tratamos as seguintes categorias de dados pessoais, estruturadas de forma limpa e sem duplicidades para garantir transparência total:",
+          subsections: [
+            {
+              subtitle: "Dados Cadastrais e de Perfil",
+              text: "Nome completo, número de registro profissional (CREA/CAU), data de nascimento, categoria de associação, matrícula e data de admissão. As contas de acesso são pré-criadas com base nos dados existentes para fins de autenticação de identidade."
+            },
+            {
+              subtitle: "Dados de Contato",
+              text: "Endereço de e-mail e número de telefone celular. Utilizados para comunicação administrativa e envio de alertas relevantes sobre reservas e suporte."
+            },
+            {
+              subtitle: "Dados de Identificação Visual (Carteira Digital)",
+              text: "Foto de perfil enviada diretamente pelo usuário ou capturada por câmera para fins de identificação visual na carteira digital, validada administrativamente."
+            },
+            {
+              subtitle: "Dados de Dependentes",
+              text: "Nome completo, parentesco e data de nascimento dos dependentes. Informações fornecidas pelo associado titular sob consentimento legal para cadastro e acesso."
+            },
+            {
+              subtitle: "Registros de Acesso e Coletas Automáticas",
+              text: "Endereço IP, tipo de navegador, sistema operacional, data/hora de acesso e registros de aceite assinados digitalmente para auditoria de segurança."
+            }
+          ]
+        },
+        {
+          title: "2. Finalidade do Tratamento de Dados & Bases Legais",
+          intro: "Tratamos os seus dados pessoais em estrita conformidade com a Lei Geral de Proteção de Dados (LGPD) exclusivamente para as seguintes finalidades:",
+          subsections: [
+            {
+              subtitle: "A. Emissão da Carteira Digital",
+              text: "Identificação e validação imediata do associado titular e dependentes nas dependências da AFEA e parceiros."
+            },
+            {
+              subtitle: "B. Prestação de Serviços do Portal",
+              text: "Processamento de reservas de churrasqueiras, atualizações cadastrais efetuadas pelos próprios membros e comunicados oficiais."
+            },
+            {
+              subtitle: "C. Segurança e Vínculo de Dispositivos",
+              text: "Prevenção a fraudes, impedindo logins simultâneos em múltiplos dispositivos não autorizados sob a mesma matrícula."
+            },
+            {
+              subtitle: "D. Obrigações Legais",
+              text: "Retenção de logs de acesso de acordo com o exigido pela Legislação Federal e o Marco Civil da Internet."
+            }
+          ]
+        },
+        {
+          title: "3. Compartilhamento e Armazenamento dos Dados",
+          intro: "Os dados pessoais dos associados são armazenados em ambiente de nuvem altamente seguro, sob critérios de confidencialidade rigorosos:",
+          bullets: [
+            "Sem Fins Comerciais: A AFEA não comercializa ou compartilha dados com terceiros para fins de marketing ou publicidade.",
+            "Provedores de Infraestrutura: Dados hospedados no Google Firebase (autenticação segura) e serviços internos administrativos do Google Drive com criptografia de ponta.",
+            "Provedores de Serviços de TI: Apenas empresas terceirizadas sob contrato rígido de proteção de dados atuando sob direção da associação.",
+            "Cumprimento da Lei: Compartilhamento restrito aos termos de mandados judiciais oficiais ou obrigações federais."
+          ]
+        },
+        {
+          title: "4. Segurança da Informação",
+          intro: "Adotamos as melhores práticas técnicas e organizacionais para salvaguardar todos os dados pessoais coletados no sistema:",
+          bullets: [
+            "Criptografia na transmissão (protocolo de segurança SSL/TLS ativo).",
+            "Controle rígido e restrito de privilégios de acesso administrativo.",
+            "Geração de chaves criptográficas para assinaturas digitais de termos.",
+            "Bloqueio ativo de logins simultâneos suspeitos em aparelhos não reconhecidos."
+          ]
+        },
+        {
+          title: "5. Seus Direitos (LGPD)",
+          intro: "Como titular de dados pessoais, você pode exercer os direitos previstos na LGPD a qualquer momento de forma gratuita e simplificada:",
+          bullets: [
+            "Confirmação de Existência de Tratamento: Direito de saber se seus dados são processados.",
+            "Direito de Acesso: Direito de visualizar seus dados cadastrados a qualquer instante.",
+            "Correção de Dados: Retificação imediata de dados desatualizados ou incorretos.",
+            "Eliminação de Dados ou Revogação do Consentimento: Solicitar cancelamento e exclusão (implicará no encerramento da conta e desativação da carteira digital)."
+          ]
+        },
+        {
+          title: "6. Retenção de Dados",
+          intro: "Os dados cadastrais e registros são guardados de forma segura enquanto durar o seu vínculo de associação ativo na AFEA. Após desligamento, reteremos apenas o período estritamente exigido para cumprimento de obrigações contábeis, judiciais e regulatórias vigentes."
+        },
+        {
+          title: "7. Privacidade de Menores",
+          intro: "O login individual e acesso autônomo ao aplicativo é restrito a maiores de 12 anos. O cadastro de dependentes infantis menores de 12 anos é coletado unicamente através do responsável legal (associado titular) para controle de acesso às dependências físicas."
+        },
+        {
+          title: "8. Alterações a esta Política de Privacidade",
+          intro: "Reservamos o direito de atualizar este termo periodicamente. Quaisquer atualizações relevantes serão notificadas através de comunicado de destaque na tela de acesso do portal."
+        },
+        {
+          title: "9. Controlador e Encarregado de Dados (DPO)",
+          intro: "Controlador dos Dados:\nAssociação Fluminense de Engenheiros e Arquitetos (AFEA)\nCNPJ nº 30.136.865/0001-40\nSede: Av. Roberto Silveira, 245 – Icaraí – Niterói - RJ\n\nEncarregado pelo Tratamento (DPO):\nPara dúvidas, reclamações ou requisições legais, entre em contato direto pelo e-mail oficial: atendimento@afea-rj.org.br."
+        }
+      ];
+
+      sections.forEach(sec => {
+        // Draw section Title
+        checkPageOverflow(12);
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(13);
+        doc.setTextColor(15, 23, 42); // slate-900
+        doc.text(sec.title, marginX, posY);
+        posY += 6;
+
+        // Draw intro paragraph
+        if (sec.intro) {
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(9.5);
+          doc.setTextColor(51, 65, 85); // slate-700
+          const splitIntro = doc.splitTextToSize(sec.intro, printableWidth);
+          const introHeight = splitIntro.length * 4.5;
+          checkPageOverflow(introHeight + 4);
+          doc.text(splitIntro, marginX, posY);
+          posY += introHeight + 5;
+        }
+
+        // Draw subsections if they exist
+        if (sec.subsections) {
+          sec.subsections.forEach(sub => {
+            checkPageOverflow(18);
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(10);
+            doc.setTextColor(13, 148, 136); // teal-600
+            doc.text(sub.subtitle, marginX + 4, posY);
+            posY += 4.5;
+
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(9);
+            doc.setTextColor(71, 85, 105); // slate-600
+            const splitSubText = doc.splitTextToSize(sub.text, printableWidth - 8);
+            const subTextHeight = splitSubText.length * 4;
+            checkPageOverflow(subTextHeight + 6);
+            doc.text(splitSubText, marginX + 4, posY);
+            posY += subTextHeight + 6;
+          });
+        }
+
+        // Draw bullets if they exist
+        if (sec.bullets) {
+          sec.bullets.forEach(bullet => {
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(9);
+            doc.setTextColor(71, 85, 105); // slate-600
+            const fullBulletText = `• ${bullet}`;
+            const splitBullet = doc.splitTextToSize(fullBulletText, printableWidth - 6);
+            const bulletHeight = splitBullet.length * 4;
+            checkPageOverflow(bulletHeight + 3);
+            doc.text(splitBullet, marginX + 4, posY);
+            posY += bulletHeight + 3.5;
+          });
+        }
+
+        posY += 4; // spacing between sections
+      });
+
+      // Final signature and confirmation
+      checkPageOverflow(25);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(10);
+      doc.setTextColor(15, 23, 42); // slate-900
+      doc.text('AFEA - Gestão Geral de Proteção de Dados', marginX, posY);
+      posY += 5;
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8.5);
+      doc.setTextColor(100, 116, 139); // slate-500
+      doc.text('Este documento é uma cópia oficial e fidedigna para arquivamento pessoal do associado.', marginX, posY);
+
+      // Draw final page footer
+      drawFooter();
+
+      // Save
+      doc.save('Politica_de_Privacidade_AFEA.pdf');
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      alert('Erro ao gerar o PDF. Por favor, tente novamente.');
+    } finally {
+      setIsGeneratingPdf(false);
+    }
   };
 
   // Helper to highlight searched terms inside text
@@ -182,10 +479,27 @@ const App: React.FC = () => {
             <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 shrink-0 w-full sm:w-auto">
               <button
                 onClick={handleDownloadPdf}
-                className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2.5 bg-teal-600 border border-teal-700 text-white rounded-xl text-sm font-bold hover:bg-teal-700 transition-all cursor-pointer shadow-xs shrink-0"
+                disabled={isGeneratingPdf}
+                className={`w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold transition-all shrink-0 ${
+                  isGeneratingPdf 
+                    ? 'bg-teal-850 text-teal-200 cursor-not-allowed opacity-80' 
+                    : 'bg-teal-600 border border-teal-700 text-white hover:bg-teal-700 cursor-pointer shadow-xs'
+                }`}
               >
-                <Download className="w-4 h-4 text-white" />
-                <span>Baixar PDF</span>
+                {isGeneratingPdf ? (
+                  <>
+                    <svg className="animate-spin h-4 w-4 text-teal-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span>Gerando...</span>
+                  </>
+                ) : (
+                  <>
+                    <Download className="w-4 h-4 text-white" />
+                    <span>Baixar PDF</span>
+                  </>
+                )}
               </button>
 
               <button
@@ -885,22 +1199,22 @@ const App: React.FC = () => {
                 <div className="space-y-2.5 bg-slate-50 p-4 rounded-2xl border border-slate-100">
                   <div className="flex items-start gap-2.5 text-xs text-slate-700">
                     <span className="w-5 h-5 rounded-full bg-teal-100 text-teal-700 font-bold flex items-center justify-center text-[10px] shrink-0 mt-0.5">1</span>
-                    <p>Clique no botão <strong>"Confirmar e Gerar"</strong> abaixo.</p>
+                    <p>Clique no botão <strong>"Baixar PDF Agora"</strong> abaixo.</p>
                   </div>
                   <div className="flex items-start gap-2.5 text-xs text-slate-700">
                     <span className="w-5 h-5 rounded-full bg-teal-100 text-teal-700 font-bold flex items-center justify-center text-[10px] shrink-0 mt-0.5">2</span>
-                    <p>No campo <strong>Destino / Impressora</strong>, selecione a opção <strong>"Salvar como PDF"</strong> (ou <em>"Save as PDF"</em>).</p>
+                    <p>O arquivo será gerado instantaneamente no seu dispositivo e o download começará sozinho.</p>
                   </div>
                   <div className="flex items-start gap-2.5 text-xs text-slate-700">
                     <span className="w-5 h-5 rounded-full bg-teal-100 text-teal-700 font-bold flex items-center justify-center text-[10px] shrink-0 mt-0.5">3</span>
-                    <p>Escolha o local de salvamento e clique em <strong>Salvar</strong>.</p>
+                    <p>Ideal para guardar em seu celular, tablet, computador ou enviar por e-mail.</p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-2 bg-amber-50 text-amber-800 p-3.5 rounded-xl border border-amber-100 text-xs">
-                  <Info className="w-4 h-4 shrink-0 text-amber-600 mt-0.5" />
+                <div className="flex items-start gap-2 bg-teal-50 text-teal-800 p-3.5 rounded-xl border border-teal-100 text-xs">
+                  <Info className="w-4 h-4 shrink-0 text-teal-600 mt-0.5" />
                   <p>
-                    <strong>Nota:</strong> O gerador irá automaticamente unificar todas as seções da política para garantir que o PDF seja gerado completo e sem cortes.
+                    <strong>Nota:</strong> O PDF é gerado localmente em alta definição, garantindo que nenhum dado saia do seu navegador.
                   </p>
                 </div>
               </div>
@@ -914,9 +1228,10 @@ const App: React.FC = () => {
                 </button>
                 <button
                   onClick={handleConfirmDownloadPdf}
-                  className="flex-1 py-2.5 bg-teal-600 hover:bg-teal-700 text-white rounded-xl text-xs font-bold transition-all cursor-pointer text-center shadow-xs hover:shadow-sm"
+                  className="flex-1 py-2.5 bg-teal-600 hover:bg-teal-700 text-white rounded-xl text-xs font-bold transition-all cursor-pointer text-center shadow-xs hover:shadow-sm flex items-center justify-center gap-1.5"
                 >
-                  Confirmar e Gerar
+                  <Download className="w-3.5 h-3.5" />
+                  <span>Baixar PDF Agora</span>
                 </button>
               </div>
             </motion.div>
