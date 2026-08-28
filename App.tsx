@@ -183,7 +183,7 @@ const App: React.FC = () => {
       // Introduction text
       const introParagraphs = [
         "A Associação Fluminense de Engenheiros e Arquitetos (AFEA), CNPJ nº 30.136.865/0001-40, com sede na Av. Roberto Silveira, 245 – Icaraí – Niterói - RJ, valoriza a privacidade e a segurança das informações de seus associados. Esta Política de Privacidade descreve como coletamos, usamos, armazenamos e protegemos os seus dados pessoais no âmbito do Portal do Associado e na emissão da Carteira Digital do Associado.",
-        "A sua privacidade é importante para nós. É política do nosso aplicativo respeitar a sua privacidade em relação a qualquer informação sua que possamos coletar. Solicitamos informações pessoais apenas quando realmente precisamos delas para lhe fornecer um serviço. Fazemo-lo por meios justos e legais, com o seu conhecimento e consentimento. Também informamos por que estamos coletando e como será usado.",
+        "A sua privacidade é prioridade para a AFEA. É política do nosso aplicativo respeitar a sua privacidade em relação a qualquer informação sua que possamos tratar no Portal do Associado. O tratamento de dados pessoais é fundamentado estritamente nas hipóteses legais previstas no Artigo 7º da LGPD (Lei nº 13.709/2018), com destaque para a Execução de Contrato/Estatuto Associativo, Cumprimento de Obrigação Legal e Regulatória, Legítimo Interesse e Prevenção à Fraude. O consentimento é utilizado de forma pontual para finalidades facultativas e específicas solicitadas pelo associado.",
         "Apenas retemos as informações coletadas pelo tempo necessário para fornecer o serviço solicitado. Quando armazenamos dados, protegemos dentro de meios comercialmente aceitáveis para evitar perdas e roubos, bem como acesso, divulgação, cópia, uso ou modificação não autorizados."
       ];
 
@@ -245,34 +245,34 @@ const App: React.FC = () => {
           ]
         },
         {
-          title: "2. Finalidade do Tratamento de Dados & Bases Legais",
-          intro: "Tratamos os seus dados pessoais em estrita conformidade com a Lei Geral de Proteção de Dados (LGPD) exclusivamente para as seguintes finalidades:",
+          title: "2. Finalidade do Tratamento de Dados & Bases Legais (Art. 7º da LGPD)",
+          intro: "Tratamos os seus dados pessoais em estrita conformidade com a Lei Geral de Proteção de Dados (LGPD), vinculando expressamente cada finalidade a uma base legal específica autorizada pela legislação:",
           subsections: [
             {
-              subtitle: "A. Emissão da Carteira Digital",
-              text: "Identificação e validação imediata do associado titular e dependentes nas dependências da AFEA e parceiros."
+              subtitle: "A. Emissão e Validação da Carteira Digital",
+              text: "Identificação e validação imediata do associado titular e seus dependentes nas dependências da AFEA e parceiros. Base Legal: Execução de Contrato e Estatuto Associativo (Art. 7º, V da LGPD)."
             },
             {
-              subtitle: "B. Prestação de Serviços do Portal",
-              text: "Processamento de reservas de churrasqueiras, atualizações cadastrais efetuadas pelos próprios membros e comunicados oficiais."
+              subtitle: "B. Prestação de Serviços do Portal, Reservas e Atualizações Cadastrais",
+              text: "Processamento de reservas de churrasqueiras, gerenciamento administrativo de atualizações cadastrais e comunicados oficiais. Base Legal: Execução de Contrato/Estatuto (Art. 7º, V da LGPD) e Consentimento do Titular (Art. 7º, I da LGPD) para inclusão voluntária de dependentes e envio de comunicados facultativos."
             },
             {
-              subtitle: "C. Segurança e Vínculo de Dispositivos",
-              text: "Prevenção a fraudes, impedindo logins simultâneos em múltiplos dispositivos não autorizados sob a mesma matrícula."
+              subtitle: "C. Segurança, Biometria Visual e Vínculo de Dispositivos",
+              text: "Prevenção a fraudes, validação de foto de perfil e limitação de logins simultâneos em múltiplos dispositivos sob a mesma matrícula. Base Legal: Legítimo Interesse do Controlador (Art. 7º, IX da LGPD) e Prevenção à Fraude e Segurança do Titular (Art. 7º, IX e X da LGPD; Art. 11, II, 'g')."
             },
             {
-              subtitle: "D. Obrigações Legais",
-              text: "Retenção de logs de acesso de acordo com o exigido pela Legislação Federal e o Marco Civil da Internet."
+              subtitle: "D. Obrigações Legais e Regulatórias",
+              text: "Retenção de logs de acesso de acordo com o exigido pela Legislação Federal e o Marco Civil da Internet (Lei nº 12.965/2014). Base Legal: Cumprimento de Obrigação Legal ou Regulatória (Art. 7º, II da LGPD)."
             }
           ]
         },
         {
-          title: "3. Compartilhamento e Armazenamento dos Dados",
-          intro: "Os dados pessoais dos associados são armazenados em ambiente de nuvem altamente seguro, sob critérios de confidencialidade rigorosos:",
+          title: "3. Compartilhamento, Armazenamento e Transferência Internacional de Dados",
+          intro: "Os dados pessoais dos associados são armazenados em ambiente de nuvem altamente seguro, sob critérios de confidencialidade e salvaguardas contratuais rigorosas:",
           bullets: [
-            "Sem Fins Comerciais: A AFEA não comercializa ou compartilha dados com terceiros para fins de marketing ou publicidade.",
-            "Provedores de Infraestrutura: Dados hospedados no Google Firebase (autenticação segura) e serviços internos administrativos do Google Drive com criptografia de ponta.",
-            "Provedores de Serviços de TI: Apenas empresas terceirizadas sob contrato rígido de proteção de dados atuando sob direção da associação.",
+            "Sem Fins Comerciais: A AFEA não comercializa, aluga ou compartilha dados com terceiros para fins de marketing ou publicidade.",
+            "Provedores de Infraestrutura e Transferência Internacional (Art. 33 da LGPD): Os dados são processados e hospedados em servidores de nuvem de grande porte (Google Firebase para autenticação e banco de dados ágil, e Google Drive/Cloud para gestão de cadastros). Tendo em vista que os data centers dessas provedoras podem estar localizados fora do Brasil, ocorre Transferência Internacional de Dados (Art. 33, I e II da LGPD), resguardada por cláusulas contratuais padrão, certificações ISO/IEC 27001 e nível adequado de segurança compatível com a LGPD.",
+            "Provedores de Serviços de TI: Apenas empresas terceirizadas sob contrato rígido de proteção de dados atuando sob direção da associação na qualidade de operadoras.",
             "Cumprimento da Lei: Compartilhamento restrito aos termos de mandados judiciais oficiais ou obrigações federais."
           ]
         },
@@ -287,13 +287,17 @@ const App: React.FC = () => {
           ]
         },
         {
-          title: "5. Seus Direitos (LGPD)",
-          intro: "Como titular de dados pessoais, você pode exercer os direitos previstos na LGPD a qualquer momento de forma gratuita e simplificada:",
+          title: "5. Seus Direitos enquanto Titular de Dados (Art. 18 da LGPD)",
+          intro: "Como titular de dados pessoais, você pode exercer os direitos previstos no Art. 18 da LGPD a qualquer momento de forma gratuita e simplificada:",
           bullets: [
-            "Confirmação de Existência de Tratamento: Direito de saber se seus dados são processados.",
-            "Direito de Acesso: Direito de visualizar seus dados cadastrados a qualquer instante.",
-            "Correção de Dados: Retificação imediata de dados desatualizados ou incorretos.",
-            "Eliminação de Dados ou Revogação do Consentimento: Solicitar cancelamento e exclusão (implicará no encerramento da conta e desativação da carteira digital)."
+            "Confirmação e Acesso (Art. 18, I e II): Direito de confirmar a existência de tratamento e acessar os seus dados cadastrados a qualquer instante.",
+            "Correção de Dados (Art. 18, III): Retificação imediata de dados incompletos, inexatos ou desatualizados.",
+            "Anonimização, Bloqueio ou Eliminação (Art. 18, IV): Requerer a anonimização, bloqueio ou eliminação de dados desnecessários, excessivos ou tratados em desconformidade com a lei.",
+            "Portabilidade dos Dados (Art. 18, V): Solicitar a portabilidade dos dados a outro fornecedor de serviço ou entidade, mediante requisição expressa e observados os segredos comercial e industrial.",
+            "Eliminação de Dados com Consentimento (Art. 18, VI): Solicitar a exclusão de dados tratados unicamente com base no consentimento, ressalvadas as hipóteses de guarda legal obrigatória.",
+            "Informação sobre Compartilhamento (Art. 18, VII): Obter informação clara sobre entidades públicas e privadas com as quais o controlador realizou uso compartilhado de dados.",
+            "Informação sobre Opção de Não Consentir (Art. 18, VIII): Ser informado sobre a possibilidade de não fornecer consentimento e sobre as consequências da negativa.",
+            "Revogação do Consentimento (Art. 18, IX): Revogar a qualquer momento o consentimento concedido para finalidades específicas (pode implicar na desativação do acesso à carteira digital)."
           ]
         },
         {
@@ -309,8 +313,8 @@ const App: React.FC = () => {
           intro: "Reservamos o direito de atualizar este termo periodicamente. Quaisquer atualizações relevantes serão notificadas através de comunicado de destaque na tela de acesso do portal."
         },
         {
-          title: "9. Controlador e Encarregado de Dados (DPO)",
-          intro: "Controlador dos Dados:\nAssociação Fluminense de Engenheiros e Arquitetos (AFEA)\nCNPJ nº 30.136.865/0001-40\nSede: Av. Roberto Silveira, 245 – Icaraí – Niterói - RJ\n\nEncarregado pelo Tratamento (DPO):\nPara dúvidas, reclamações ou requisições legais, entre em contato direto pelo e-mail oficial: atendimento@afea-rj.org.br."
+          title: "9. Controlador e Encarregado pelo Tratamento de Dados (DPO)",
+          intro: "Controlador dos Dados:\nAssociação Fluminense de Engenheiros e Arquitetos (AFEA)\nCNPJ nº 30.136.865/0001-40\nSede: Av. Roberto Silveira, 245 – Icaraí – Niterói - RJ\n\nEncarregado pelo Tratamento de Dados (DPO):\nComitê Interno de Proteção de Dados e Privacidade da AFEA / Encarregado pelo Tratamento de Dados (DPO).\nPara dúvidas, requisições dos direitos do Art. 18 da LGPD ou contato com autoridades, fale diretamente com o DPO pelo e-mail oficial: atendimento@afea-rj.org.br."
         }
       ];
 
@@ -502,7 +506,7 @@ const App: React.FC = () => {
             </p>
             <p>
               {highlightText(
-                "A sua privacidade é importante para nós. É política do nosso aplicativo respeitar a sua privacidade em relação a qualquer informação sua que possamos coletar. Solicitamos informações pessoais apenas quando realmente precisamos delas para lhe fornecer um serviço. Fazemo-lo por meios justos e legais, com o seu conhecimento e consentimento. Também informamos por que estamos coletando e como será usado."
+                "A sua privacidade é prioridade para a AFEA. É política do nosso aplicativo respeitar a sua privacidade em relação a qualquer informação sua que possamos tratar no Portal do Associado. O tratamento de dados pessoais é fundamentado estritamente nas hipóteses legais previstas no Artigo 7º da LGPD (Lei nº 13.709/2018), com destaque para a Execução de Contrato/Estatuto Associativo, Cumprimento de Obrigação Legal e Regulatória, Legítimo Interesse e Prevenção à Fraude. O consentimento é utilizado de forma pontual para finalidades facultativas e específicas solicitadas pelo associado."
               )}
             </p>
             <p>
@@ -640,89 +644,121 @@ const App: React.FC = () => {
           <section className="space-y-6">
             <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
               <div className="bg-teal-50 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm">2</div>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Finalidade do Tratamento de Dados &amp; Bases Legais</h2>
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Finalidade do Tratamento de Dados &amp; Bases Legais (Art. 7º da LGPD)</h2>
             </div>
 
                 <p className="text-slate-600 text-sm">
                   {highlightText(
-                    "Tratamos os seus dados pessoais em estrita conformidade com a Lei Geral de Proteção de Dados (LGPD) exclusivamente para as finalidades descritas a seguir:"
+                    "Tratamos os seus dados pessoais em estrita conformidade com a Lei Geral de Proteção de Dados (LGPD), vinculando expressamente cada finalidade de tratamento a uma base legal autorizadora:"
                   )}
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="p-4 rounded-xl border border-slate-100 bg-[#fbfdfd] hover:border-teal-100 transition-all">
-                    <h4 className="font-bold text-teal-900 text-xs uppercase tracking-wider">A. Emissão da Carteira Digital</h4>
-                    <p className="text-slate-600 text-xs mt-1.5 leading-relaxed">
+                  <div className="p-4 rounded-xl border border-slate-100 bg-[#fbfdfd] hover:border-teal-100 transition-all space-y-2">
+                    <div className="flex items-center justify-between">
+                      <h4 className="font-bold text-teal-900 text-xs uppercase tracking-wider">A. Emissão da Carteira Digital</h4>
+                      <span className="bg-teal-100 text-teal-800 text-[10px] font-bold px-2 py-0.5 rounded-md border border-teal-200">
+                        Art. 7º, V
+                      </span>
+                    </div>
+                    <p className="text-slate-600 text-xs leading-relaxed">
                       {highlightText(
                         "Identificação e validação segura e imediata do associado titular e seus dependentes cadastrados nas dependências da AFEA e em parceiros conveniados."
                       )}
                     </p>
+                    <div className="text-[11px] font-semibold text-teal-800 pt-1 border-t border-slate-100">
+                      Base Legal: Execução de Contrato e Estatuto Associativo (Art. 7º, V da LGPD).
+                    </div>
                   </div>
 
-                  <div className="p-4 rounded-xl border border-slate-100 bg-[#fbfdfd] hover:border-teal-100 transition-all">
-                    <h4 className="font-bold text-teal-900 text-xs uppercase tracking-wider">B. Prestação de Serviços do Portal</h4>
-                    <p className="text-slate-600 text-xs mt-1.5 leading-relaxed">
+                  <div className="p-4 rounded-xl border border-slate-100 bg-[#fbfdfd] hover:border-teal-100 transition-all space-y-2">
+                    <div className="flex items-center justify-between">
+                      <h4 className="font-bold text-teal-900 text-xs uppercase tracking-wider">B. Prestação de Serviços do Portal</h4>
+                      <span className="bg-teal-100 text-teal-800 text-[10px] font-bold px-2 py-0.5 rounded-md border border-teal-200">
+                        Art. 7º, V e I
+                      </span>
+                    </div>
+                    <p className="text-slate-600 text-xs leading-relaxed">
                       {highlightText(
                         "Processamento de reservas de churrasqueiras, gerenciamento administrativo de atualizações cadastrais efetuadas pelos próprios membros, e envio de avisos oficiais importantes."
                       )}
                     </p>
+                    <div className="text-[11px] font-semibold text-teal-800 pt-1 border-t border-slate-100">
+                      Base Legal: Execução de Contrato/Estatuto (Art. 7º, V) e Consentimento do Titular (Art. 7º, I) para inclusões voluntárias de dependentes.
+                    </div>
                   </div>
 
-                  <div className="p-4 rounded-xl border border-slate-100 bg-[#fbfdfd] hover:border-teal-100 transition-all">
-                    <h4 className="font-bold text-teal-900 text-xs uppercase tracking-wider">C. Segurança, Integridade e Vínculo de Dispositivos</h4>
-                    <p className="text-slate-600 text-xs mt-1.5 leading-relaxed">
+                  <div className="p-4 rounded-xl border border-slate-100 bg-[#fbfdfd] hover:border-teal-100 transition-all space-y-2">
+                    <div className="flex items-center justify-between">
+                      <h4 className="font-bold text-teal-900 text-xs uppercase tracking-wider">C. Segurança, Biometria Visual e Vínculo</h4>
+                      <span className="bg-teal-100 text-teal-800 text-[10px] font-bold px-2 py-0.5 rounded-md border border-teal-200">
+                        Art. 7º, IX e X
+                      </span>
+                    </div>
+                    <p className="text-slate-600 text-xs leading-relaxed">
                       {highlightText(
-                        "Prevenção ativa a fraudes e acessos indevidos. Nosso sistema implementa uma camada adicional de proteção que vincula o seu dispositivo (celular, tablet ou computador) à sua matrícula. Esse mecanismo impede que um mesmo aparelho seja utilizado para acessar duas contas de associados diferentes, dificultando o compartilhamento inadequado de credenciais."
+                        "Prevenção ativa a fraudes e acessos indevidos. Nosso sistema vincula o dispositivo (celular, tablet ou PC) à sua matrícula, impedindo logins simultâneos suspeitos em múltiplos aparelhos sob a mesma conta."
                       )}
                     </p>
+                    <div className="text-[11px] font-semibold text-teal-800 pt-1 border-t border-slate-100">
+                      Base Legal: Legítimo Interesse (Art. 7º, IX) e Prevenção à Fraude e Segurança do Titular (Art. 7º, IX/X e Art. 11, II, 'g').
+                    </div>
                   </div>
 
-                  <div className="p-4 rounded-xl border border-slate-100 bg-[#fbfdfd] hover:border-teal-100 transition-all">
-                    <h4 className="font-bold text-teal-900 text-xs uppercase tracking-wider">D. Obrigações Legais e de Auditoria</h4>
-                    <p className="text-slate-600 text-xs mt-1.5 leading-relaxed">
+                  <div className="p-4 rounded-xl border border-slate-100 bg-[#fbfdfd] hover:border-teal-100 transition-all space-y-2">
+                    <div className="flex items-center justify-between">
+                      <h4 className="font-bold text-teal-900 text-xs uppercase tracking-wider">D. Obrigações Legais e de Auditoria</h4>
+                      <span className="bg-teal-100 text-teal-800 text-[10px] font-bold px-2 py-0.5 rounded-md border border-teal-200">
+                        Art. 7º, II
+                      </span>
+                    </div>
+                    <p className="text-slate-600 text-xs leading-relaxed">
                       {highlightText(
-                        "Retenção de logs de acesso e de conexões para auditoria de sistemas, de acordo com o exigido pela Legislação Federal (incluindo o Marco Civil da Internet)."
+                        "Retenção obrigatoriedade de logs de conexão e de acessos ao sistema para fins de auditoria e segurança cibernética."
                       )}
                     </p>
+                    <div className="text-[11px] font-semibold text-teal-800 pt-1 border-t border-slate-100">
+                      Base Legal: Cumprimento de Obrigação Legal/Regulatória (Art. 7º, II da LGPD) e Marco Civil da Internet (Lei nº 12.965/2014).
+                    </div>
                   </div>
                 </div>
 
                 {/* Bases Legais (original content expanded & unified) */}
                 <div className="bg-slate-50 p-5 rounded-2xl border border-slate-150 space-y-4">
-                  <h3 className="font-bold text-slate-800 text-sm">Bases Legais de Tratamento:</h3>
+                  <h3 className="font-bold text-slate-800 text-sm">Resumo Detalhado das Hipóteses Legais do Art. 7º da LGPD:</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                    <div className="bg-white p-3 rounded-xl border border-slate-200/60">
-                      <span className="font-bold text-teal-800 block mb-1">Execução de Contrato:</span>
+                    <div className="bg-white p-3.5 rounded-xl border border-slate-200/60 shadow-2xs">
+                      <span className="font-bold text-teal-800 block mb-1">Execução de Contrato / Estatuto (Art. 7º, V):</span>
                       <p className="text-slate-600 leading-relaxed">
                         {highlightText(
-                          "A maioria dos dados que utilizamos (nome, matrícula e status de associado) são tratados para viabilizar o seu vínculo associativo e executar nossas obrigações estatutárias com você."
+                          "A maioria dos dados que utilizamos (nome, matrícula, registros profissionais e status de associado) são tratados para viabilizar o seu vínculo associativo e executar nossas obrigações estatutárias e contratuais com você."
                         )}
                       </p>
                     </div>
 
-                    <div className="bg-white p-3 rounded-xl border border-slate-200/60">
-                      <span className="font-bold text-teal-800 block mb-1">Consentimento:</span>
+                    <div className="bg-white p-3.5 rounded-xl border border-slate-200/60 shadow-2xs">
+                      <span className="font-bold text-teal-800 block mb-1">Consentimento do Titular (Art. 7º, I):</span>
                       <p className="text-slate-600 leading-relaxed">
                         {highlightText(
-                          "Em ações proativas específicas, como envio de nova foto pessoal, inclusão voluntária de dependentes ou requisições de reservas de churrasqueira, tratamos dados com base no seu consentimento."
+                          "Aplicado unicamente para ações proativas e facultativas do associado, tais como envio voluntário de nova foto de perfil, inclusão facultativa de dependentes ou requisições específicas."
                         )}
                       </p>
                     </div>
 
-                    <div className="bg-white p-3 rounded-xl border border-slate-200/60">
-                      <span className="font-bold text-teal-800 block mb-1">Legítimo Interesse:</span>
+                    <div className="bg-white p-3.5 rounded-xl border border-slate-200/60 shadow-2xs">
+                      <span className="font-bold text-teal-800 block mb-1">Legítimo Interesse &amp; Prevenção a Fraudes (Art. 7º, IX e X):</span>
                       <p className="text-slate-600 leading-relaxed">
                         {highlightText(
-                          "Utilizamos logs de rede e navegação para auditorias de segurança lógica do portal, prevenção de invasões cibernéticas e melhorias de usabilidade tecnológica."
+                          "Utilizamos logs de rede, IP e vinculação lógica de dispositivos para auditorias de segurança, prevenção de acessos simultâneos indevidos e proteção contra invasões cibernéticas."
                         )}
                       </p>
                     </div>
 
-                    <div className="bg-white p-3 rounded-xl border border-slate-200/60">
-                      <span className="font-bold text-teal-800 block mb-1">Obrigação Legal:</span>
+                    <div className="bg-white p-3.5 rounded-xl border border-slate-200/60 shadow-2xs">
+                      <span className="font-bold text-teal-800 block mb-1">Cumprimento de Obrigação Legal (Art. 7º, II):</span>
                       <p className="text-slate-600 leading-relaxed">
                         {highlightText(
-                          "Tratamento e guarda de informações necessárias para dar cumprimento a obrigações legais, fiscais, regulatórias ou ordens judiciais específicas."
+                          "Guarda e tratamento de registros de conexões e acessos obrigatórios impostos pela Lei nº 12.965/2014 (Marco Civil da Internet) e legislação tributária/contábil vigente."
                         )}
                       </p>
                     </div>
@@ -730,20 +766,20 @@ const App: React.FC = () => {
                 </div>
               </section>
 
-          {/* Section 3: Compartilhamento e Armazenamento dos Dados */}
+          {/* Section 3: Compartilhamento, Armazenamento e Transferência Internacional de Dados */}
           <section className="space-y-6">
             <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
               <div className="bg-teal-50 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm">3</div>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Compartilhamento e Armazenamento dos Dados</h2>
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Compartilhamento, Armazenamento e Transferência Internacional de Dados</h2>
             </div>
 
                 <p className="text-slate-700 leading-relaxed text-sm">
                   {highlightText(
-                    "Os dados pessoais dos associados são armazenados em ambiente de nuvem seguro, estruturado e com confidencialidade garantida por contratos rigorosos:"
+                    "Os dados pessoais dos associados são armazenados em ambiente de nuvem seguro, estruturado e com confidencialidade garantida por contratos rigorosos e políticas institucionais:"
                   )}
                 </p>
 
-                <div className="space-y-3 pl-1 text-xs sm:text-sm text-slate-600">
+                <div className="space-y-3.5 pl-1 text-xs sm:text-sm text-slate-600">
                   <div className="flex items-start gap-2.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-teal-600 shrink-0 mt-2"></span>
                     <p>
@@ -752,19 +788,34 @@ const App: React.FC = () => {
                       )}
                     </p>
                   </div>
+
                   <div className="flex items-start gap-2.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-teal-600 shrink-0 mt-2"></span>
                     <p>
-                      <strong>Provedores de Infraestrutura:</strong> {highlightText(
-                        "Os dados podem ser processados e armazenados por ferramentas de nuvem parceiras estruturadas (como Google Firebase para autenticação e banco de dados ágil, e serviços internos do Google Drive ou Planilhas para fins de cadastros administrativos), que mantêm rígidos padrões internacionais de segurança e criptografia de dados."
+                      <strong>Provedores de Infraestrutura de Nuvem:</strong> {highlightText(
+                        "Os dados são processados e armazenados em plataformas de infraestrutura tecnológica líderes de mercado (como Google Firebase para autenticação e banco de dados em tempo real, e Google Drive/Cloud para gestão documental de cadastros)."
                       )}
                     </p>
                   </div>
+
+                  {/* Transferência Internacional Box */}
+                  <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 space-y-2 mt-2">
+                    <div className="flex items-center gap-2 text-teal-900 font-bold text-xs uppercase tracking-wider">
+                      <ShieldCheck className="w-4 h-4 text-teal-600" />
+                      <span>Cláusula de Transferência Internacional de Dados (Art. 33 da LGPD)</span>
+                    </div>
+                    <p className="text-xs text-slate-600 leading-relaxed">
+                      {highlightText(
+                        "Devido ao uso de serviços de infraestrutura de nuvem global (Google Firebase / Google Cloud Infrastructure), os dados armazenados podem ser hospedados em servidores localizados fora do território nacional (principalmente nos Estados Unidos). Esta operação caracteriza Transferência Internacional de Dados nos termos do Art. 33, I e II da LGPD. Declaramos que os provedores contratados cumprem rigorosas cláusulas contratuais padrão de segurança, certificações ISO/IEC 27001 e acordos internacionais de privacidade que asseguram um nível de proteção de dados equivalente ou superior ao exigido pela legislação brasileira."
+                      )}
+                    </p>
+                  </div>
+
                   <div className="flex items-start gap-2.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-teal-600 shrink-0 mt-2"></span>
                     <p>
                       <strong>Provedores de Serviços de TI:</strong> {highlightText(
-                        "Compartilhamento restrito a empresas contratadas para suporte tecnológico e manutenção lógica do portal, as quais atuam estritamente como operadoras e sob comando direto da associação."
+                        "Compartilhamento restrito a empresas contratadas para suporte tecnológico e manutenção lógica do portal, as quais atuam estritamente como operadoras e sob comando direto e instrução formal da associação."
                       )}
                     </p>
                   </div>
@@ -816,35 +867,47 @@ const App: React.FC = () => {
           <section className="space-y-6">
             <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
               <div className="bg-teal-50 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm">5</div>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Seus Direitos (LGPD)</h2>
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Seus Direitos enquanto Titular de Dados (Art. 18 da LGPD)</h2>
             </div>
 
             <p className="text-slate-700 leading-relaxed text-sm">
               {highlightText(
-                "Como titular de dados pessoais, você pode exercer os direitos previstos na LGPD a qualquer momento, de forma simplificada e gratuita, entrando em contato direto com a secretaria da AFEA para solicitar:"
+                "Como titular de dados pessoais, você possui os seguintes direitos garantidos expressamente pelo Artigo 18 da LGPD, os quais podem ser exercidos gratuitamente junto ao Encarregado de Dados da AFEA:"
               )}
             </p>
 
-            <div className="space-y-2.5 text-xs sm:text-sm text-slate-600">
-              <div className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-teal-600 shrink-0 mt-1" />
-                <span><strong>Confirmação de Existência de Tratamento:</strong> Direito de saber se tratamos seus dados pessoais.</span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-slate-600">
+              <div className="flex items-start gap-2 bg-slate-50/70 p-3 rounded-xl border border-slate-100">
+                <Check className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
+                <span><strong>Confirmação e Acesso (Art. 18, I e II):</strong> Confirmar a existência de tratamento e acessar os seus dados cadastrados.</span>
               </div>
-              <div className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-teal-600 shrink-0 mt-1" />
-                <span><strong>Direito de Acesso:</strong> Direito de visualizar e obter relatórios sobre seus dados pessoais cadastrados.</span>
+              <div className="flex items-start gap-2 bg-slate-50/70 p-3 rounded-xl border border-slate-100">
+                <Check className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
+                <span><strong>Correção de Dados (Art. 18, III):</strong> Solicitar a retificação imediata de dados incompletos, inexatos ou desatualizados.</span>
               </div>
-              <div className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-teal-600 shrink-0 mt-1" />
-                <span><strong>Correção de Dados:</strong> Retificação de informações inexatas, incompletas ou desatualizadas.</span>
+              <div className="flex items-start gap-2 bg-slate-50/70 p-3 rounded-xl border border-slate-100">
+                <Check className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
+                <span><strong>Anonimização, Bloqueio ou Eliminação (Art. 18, IV):</strong> Requerer a exclusão de dados desnecessários ou tratados em desconformidade.</span>
               </div>
-              <div className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-teal-600 shrink-0 mt-1" />
-                <span><strong>Anonimização, Bloqueio ou Eliminação:</strong> Direito de suspender ou requerer a exclusão de dados desnecessários ou tratados de forma ilícita.</span>
+              <div className="flex items-start gap-2 bg-slate-50/70 p-3 rounded-xl border border-slate-100">
+                <Check className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
+                <span><strong>Portabilidade dos Dados (Art. 18, V):</strong> Solicitar a transferência dos seus dados a outro fornecedor ou entidade mediante requisição.</span>
               </div>
-              <div className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-teal-600 shrink-0 mt-1" />
-                <span><strong>Revogação do Consentimento:</strong> Solicitar a revogação de consentimentos concedidos anteriormente (isso implicará na imediata desativação da sua conta de acesso digital e na indisponibilidade da sua Carteira Digital).</span>
+              <div className="flex items-start gap-2 bg-slate-50/70 p-3 rounded-xl border border-slate-100">
+                <Check className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
+                <span><strong>Eliminação com Consentimento (Art. 18, VI):</strong> Requerer a exclusão de dados tratados com base no consentimento (salvo guarda legal).</span>
+              </div>
+              <div className="flex items-start gap-2 bg-slate-50/70 p-3 rounded-xl border border-slate-100">
+                <Check className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
+                <span><strong>Uso Compartilhado (Art. 18, VII):</strong> Receber informações sobre entidades públicas e privadas com as quais os dados foram compartilhados.</span>
+              </div>
+              <div className="flex items-start gap-2 bg-slate-50/70 p-3 rounded-xl border border-slate-100">
+                <Check className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
+                <span><strong>Opção de Não Consentir (Art. 18, VIII):</strong> Ser informado sobre a possibilidade de não fornecer consentimento e consequências.</span>
+              </div>
+              <div className="flex items-start gap-2 bg-slate-50/70 p-3 rounded-xl border border-slate-100">
+                <Check className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
+                <span><strong>Revogação do Consentimento (Art. 18, IX):</strong> Revogar o consentimento a qualquer tempo (pode desativar o acesso à carteira digital).</span>
               </div>
             </div>
           </section>
@@ -911,10 +974,11 @@ const App: React.FC = () => {
               <div className="p-5 bg-slate-50 rounded-2xl border border-slate-100 flex gap-3.5 items-start">
                 <Mail className="w-5 h-5 text-teal-600 shrink-0 mt-0.5" />
                 <div className="text-xs sm:text-sm">
-                  <h4 className="font-bold text-slate-800 uppercase tracking-wider text-[11px] mb-1">Encarregado pelo Tratamento (DPO)</h4>
+                  <h4 className="font-bold text-slate-800 uppercase tracking-wider text-[11px] mb-1">Encarregado pelo Tratamento de Dados (DPO)</h4>
                   <p className="text-slate-700 leading-relaxed">
-                    Para qualquer esclarecimento, relatórios de dados ou solicitações, fale diretamente com o Encarregado de Dados pelo e-mail:
+                    <strong>Comitê Interno de Proteção de Dados e Privacidade da AFEA / Encarregado de Dados Pessoais (DPO)</strong>
                     <br />
+                    Para exercer seus direitos de titular (Art. 18 da LGPD) ou tirar dúvidas, contate o DPO pelo e-mail:
                     <a href="mailto:atendimento@afea-rj.org.br" className="text-teal-600 font-bold hover:text-teal-700 underline transition-colors block mt-1">
                       atendimento@afea-rj.org.br
                     </a>
