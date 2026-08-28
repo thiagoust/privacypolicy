@@ -320,13 +320,15 @@ const App: React.FC = () => {
       ];
 
       sections.forEach(sec => {
-        // Draw section Title
-        checkPageOverflow(12);
+        // Draw section Title with auto-wrapping for long titles
         doc.setFont('helvetica', 'bold');
-        doc.setFontSize(13);
+        doc.setFontSize(12);
         doc.setTextColor(15, 23, 42); // slate-900
-        doc.text(sec.title, marginX, posY);
-        posY += 6;
+        const splitTitle = doc.splitTextToSize(sec.title, printableWidth);
+        const titleHeight = splitTitle.length * 5.5;
+        checkPageOverflow(titleHeight + 4);
+        doc.text(splitTitle, marginX, posY);
+        posY += titleHeight + 2;
 
         // Draw intro paragraph
         if (sec.intro) {
@@ -343,12 +345,14 @@ const App: React.FC = () => {
         // Draw subsections if they exist
         if (sec.subsections) {
           sec.subsections.forEach(sub => {
-            checkPageOverflow(18);
             doc.setFont('helvetica', 'bold');
             doc.setFontSize(10);
             doc.setTextColor(13, 148, 136); // teal-600
-            doc.text(sub.subtitle, marginX + 4, posY);
-            posY += 4.5;
+            const splitSubTitle = doc.splitTextToSize(sub.subtitle, printableWidth - 8);
+            const subTitleHeight = splitSubTitle.length * 4.5;
+            checkPageOverflow(subTitleHeight + 4);
+            doc.text(splitSubTitle, marginX + 4, posY);
+            posY += subTitleHeight + 1.5;
 
             doc.setFont('helvetica', 'normal');
             doc.setFontSize(9);
