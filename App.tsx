@@ -200,7 +200,7 @@ const App: React.FC = () => {
       });
 
       // Accept Electronic Alert Box
-      const acceptAlertText = "Aceite Eletrônico & Vinculação Legal: Ao marcar a caixa de seleção de concordância na tela de login e acessar o portal, você, na qualidade de associado titular, declara ter lido, compreendido e concordado com os Termos de Uso e com esta Política de Privacidade, estendendo essa concordância aos seus dependentes cadastrados.";
+      const acceptAlertText = "Aceite Eletrônico & Vinculação Legal: Ao marcar a caixa de seleção de concordância na tela de login e acessar o portal, você, na qualidade de associado titular, declara ter lido e aceito estes Termos para a sua conta. A inclusão de dependentes fundamenta-se na Execução do Estatuto Associativo (Art. 7º, V da LGPD) e no Legítimo Interesse para acesso ao clube (Art. 7º, IX). Dependentes maiores de idade são titulares autônomos de dados e possuem o direito de exercer seus direitos individualmente perante o DPO da AFEA.";
       const splitAlert = doc.splitTextToSize(acceptAlertText, printableWidth - 8);
       const alertHeight = splitAlert.length * 4.5 + 8;
       checkPageOverflow(alertHeight + 10);
@@ -220,10 +220,10 @@ const App: React.FC = () => {
       const sections = [
         {
           title: "1. Informações que Coletamos",
-          intro: "Para fornecer os serviços do portal e emitir a Carteira Digital do Associado, coletamos e tratamos as seguintes categorias de dados pessoais, estruturadas de forma limpa e sem duplicidades para garantir transparência total:",
+          intro: "Para fornecer os serviços do portal e emitir a Carteira Digital do Associado, coletamos e tratamos as seguintes categorias de dados pessoais, estruturadas de forma transparente e fundamentada:",
           subsections: [
             {
-              subtitle: "Dados Cadastrais e de Perfil",
+              subtitle: "Dados Cadastrais e de Perfil do Titular",
               text: "Nome completo, número de registro profissional (CREA/CAU), data de nascimento, categoria de associação, matrícula e data de admissão. As contas de acesso são pré-criadas com base nos dados existentes para fins de autenticação de identidade."
             },
             {
@@ -235,8 +235,8 @@ const App: React.FC = () => {
               text: "Foto de perfil enviada diretamente pelo usuário ou capturada por câmera para fins de identificação visual na carteira digital, validada administrativamente."
             },
             {
-              subtitle: "Dados de Dependentes",
-              text: "Nome completo, parentesco e data de nascimento dos dependentes. Informações fornecidas pelo associado titular sob consentimento legal para cadastro e acesso."
+              subtitle: "Dados de Dependentes (Maiores e Menores)",
+              text: "Nome completo, parentesco e data de nascimento dos dependentes. A inclusão decorre da execução do vínculo estatutário do titular (Art. 7º, V da LGPD) ou do consentimento específico dos pais/responsáveis para menores de idade (Art. 14 da LGPD)."
             },
             {
               subtitle: "Registros de Acesso e Coletas Automáticas",
@@ -246,7 +246,7 @@ const App: React.FC = () => {
         },
         {
           title: "2. Finalidade do Tratamento de Dados & Bases Legais (Art. 7º da LGPD)",
-          intro: "Tratamos os seus dados pessoais em estrita conformidade com a Lei Geral de Proteção de Dados (LGPD), vinculando expressamente cada finalidade a uma base legal específica autorizada pela legislação:",
+          intro: "Tratamos os seus dados pessoais em estrita conformidade com a Lei Geral de Proteção de Dados (LGPD), vinculando expressamente cada finalidade a uma base legal autorizadora:",
           subsections: [
             {
               subtitle: "A. Emissão e Validação da Carteira Digital",
@@ -254,7 +254,7 @@ const App: React.FC = () => {
             },
             {
               subtitle: "B. Prestação de Serviços do Portal, Reservas e Atualizações Cadastrais",
-              text: "Processamento de reservas de churrasqueiras, gerenciamento administrativo de atualizações cadastrais e comunicados oficiais. Base Legal: Execução de Contrato/Estatuto (Art. 7º, V da LGPD) e Consentimento do Titular (Art. 7º, I da LGPD) para inclusão voluntária de dependentes e envio de comunicados facultativos."
+              text: "Processamento de reservas de churrasqueiras, gerenciamento administrativo de atualizações cadastrais e comunicados oficiais. Base Legal: Execução de Contrato/Estatuto (Art. 7º, V da LGPD) e Consentimento do Titular (Art. 7º, I da LGPD) para solicitações voluntárias."
             },
             {
               subtitle: "C. Segurança, Biometria Visual e Vínculo de Dispositivos",
@@ -267,46 +267,47 @@ const App: React.FC = () => {
           ]
         },
         {
-          title: "3. Compartilhamento, Armazenamento e Transferência Internacional de Dados",
+          title: "3. Compartilhamento, Armazenamento e Transferência Internacional de Dados (Art. 33 da LGPD)",
           intro: "Os dados pessoais dos associados são armazenados em ambiente de nuvem altamente seguro, sob critérios de confidencialidade e salvaguardas contratuais rigorosas:",
           bullets: [
             "Sem Fins Comerciais: A AFEA não comercializa, aluga ou compartilha dados com terceiros para fins de marketing ou publicidade.",
-            "Provedores de Infraestrutura e Transferência Internacional (Art. 33 da LGPD): Os dados são processados e hospedados em servidores de nuvem de grande porte (Google Firebase para autenticação e banco de dados ágil, e Google Drive/Cloud para gestão de cadastros). Tendo em vista que os data centers dessas provedoras podem estar localizados fora do Brasil, ocorre Transferência Internacional de Dados (Art. 33, I e II da LGPD), resguardada por cláusulas contratuais padrão, certificações ISO/IEC 27001 e nível adequado de segurança compatível com a LGPD.",
+            "Provedores de Infraestrutura e Transferência Internacional (Art. 33 da LGPD): Os dados são processados e hospedados em servidores de nuvem globais (Google Firebase para autenticação e banco de dados ágil, e Google Drive/Cloud para gestão de cadastros). Como os data centers dessas provedoras podem estar localizados fora do Brasil, ocorre Transferência Internacional de Dados (Art. 33, I e II da LGPD), resguardada por cláusulas contratuais padrão, certificações ISO/IEC 27001 e nível de proteção equivalente ao exigido pela LGPD.",
             "Provedores de Serviços de TI: Apenas empresas terceirizadas sob contrato rígido de proteção de dados atuando sob direção da associação na qualidade de operadoras.",
             "Cumprimento da Lei: Compartilhamento restrito aos termos de mandados judiciais oficiais ou obrigações federais."
           ]
         },
         {
-          title: "4. Segurança da Informação",
+          title: "4. Segurança da Informação & Notificação de Incidentes (Art. 48 da LGPD)",
           intro: "Adotamos as melhores práticas técnicas e organizacionais para salvaguardar todos os dados pessoais coletados no sistema:",
           bullets: [
             "Criptografia na transmissão (protocolo de segurança SSL/TLS ativo).",
             "Controle rígido e restrito de privilégios de acesso administrativo.",
             "Geração de chaves criptográficas para assinaturas digitais de termos.",
-            "Bloqueio ativo de logins simultâneos suspeitos em aparelhos não reconhecidos."
+            "Bloqueio ativo de logins simultâneos suspeitos em aparelhos não reconhecidos.",
+            "Protocolo de Notificação de Incidentes (Art. 48 da LGPD): Em caso de ocorrência de incidente de segurança relevante que acarrete risco ou dano aos associados, a AFEA comunicará o evento formalmente à ANPD e aos titulares afetados em prazo razoável, informando a natureza dos dados, riscos e medidas corretivas adotadas."
           ]
         },
         {
           title: "5. Seus Direitos enquanto Titular de Dados (Art. 18 da LGPD)",
-          intro: "Como titular de dados pessoais, você pode exercer os direitos previstos no Art. 18 da LGPD a qualquer momento de forma gratuita e simplificada:",
+          intro: "Como titular de dados pessoais (ou dependente maior autônomo), você pode exercer todos os direitos previstos no Art. 18 da LGPD a qualquer momento, de forma gratuita e simplificada:",
           bullets: [
             "Confirmação e Acesso (Art. 18, I e II): Direito de confirmar a existência de tratamento e acessar os seus dados cadastrados a qualquer instante.",
             "Correção de Dados (Art. 18, III): Retificação imediata de dados incompletos, inexatos ou desatualizados.",
-            "Anonimização, Bloqueio ou Eliminação (Art. 18, IV): Requerer a anonimização, bloqueio ou eliminação de dados desnecessários, excessivos ou tratados em desconformidade com a lei.",
-            "Portabilidade dos Dados (Art. 18, V): Solicitar a portabilidade dos dados a outro fornecedor de serviço ou entidade, mediante requisição expressa e observados os segredos comercial e industrial.",
-            "Eliminação de Dados com Consentimento (Art. 18, VI): Solicitar a exclusão de dados tratados unicamente com base no consentimento, ressalvadas as hipóteses de guarda legal obrigatória.",
-            "Informação sobre Compartilhamento (Art. 18, VII): Obter informação clara sobre entidades públicas e privadas com as quais o controlador realizou uso compartilhado de dados.",
+            "Anonimização, Bloqueio ou Eliminação (Art. 18, IV): Requerer a anonimização, bloqueio ou exclusão de dados desnecessários, excessivos ou tratados em desconformidade com a lei.",
+            "Portabilidade dos Dados (Art. 18, V): Solicitar a portabilidade dos dados a outro prestador de serviço ou entidade mediante requisição expressa.",
+            "Eliminação de Dados com Consentimento (Art. 18, VI): Solicitar a exclusão de dados tratados com base no consentimento, ressalvadas as hipóteses de guarda legal obrigatória.",
+            "Informação sobre Uso Compartilhado (Art. 18, VII): Obter informação clara sobre entidades públicas e privadas com as quais o controlador realizou uso compartilhado de dados.",
             "Informação sobre Opção de Não Consentir (Art. 18, VIII): Ser informado sobre a possibilidade de não fornecer consentimento e sobre as consequências da negativa.",
-            "Revogação do Consentimento (Art. 18, IX): Revogar a qualquer momento o consentimento concedido para finalidades específicas (pode implicar na desativação do acesso à carteira digital)."
+            "Revogação do Consentimento (Art. 18, IX): Revogar a qualquer momento o consentimento concedido para finalidades específicas."
           ]
         },
         {
           title: "6. Retenção de Dados",
-          intro: "Os dados cadastrais e registros são guardados de forma segura enquanto durar o seu vínculo de associação ativo na AFEA. Após desligamento, reteremos apenas o período estritamente exigido para cumprimento de obrigações contábeis, judiciais e regulatórias vigentes."
+          intro: "Os dados cadastrais e registros são guardados de forma segura enquanto durar o seu vínculo de associação ativo na AFEA. Após desligamento, reteremos apenas pelo período estritamente exigido para cumprimento de obrigações contábeis, judiciais e regulatórias vigentes."
         },
         {
-          title: "7. Privacidade de Menores",
-          intro: "O login individual e acesso autônomo ao aplicativo é restrito a maiores de 12 anos. O cadastro de dependentes infantis menores de 12 anos é coletado unicamente através do responsável legal (associado titular) para controle de acesso às dependências físicas."
+          title: "7. Tratamento de Dados de Crianças e Adolescentes (Art. 14 da LGPD)",
+          intro: "O tratamento de dados de crianças e adolescentes é realizado atendendo estritamente ao seu MELHOR INTERESSE (Art. 14, caput da LGPD). A coleta de informações de menores dependentes restringe-se ao estritamente necessário para identificação visual, segurança e controle de acesso às dependências da AFEA e emissão da carteira digital familiar. O cadastro é realizado mediante consentimento específico e em destaque fornecido pelo responsável legal titular (Art. 14, § 1º da LGPD). O acesso autônomo diretamente ao aplicativo é restrito a maiores de 12 anos."
         },
         {
           title: "8. Alterações a esta Política de Privacidade",
@@ -520,7 +521,7 @@ const App: React.FC = () => {
               <div className="text-xs sm:text-sm leading-relaxed text-teal-950 font-medium">
                 <strong className="block text-teal-900 font-bold mb-1 uppercase tracking-wider text-[11px]">Aceite Eletrônico &amp; Vinculação Legal:</strong>
                 {highlightText(
-                  "Ao marcar a caixa de seleção de concordância na tela de login e acessar o portal, você, na qualidade de associado titular, declara ter lido, compreendido e concordado com os Termos de Uso e com esta Política de Privacidade, estendendo essa concordância aos seus dependentes cadastrados."
+                  "Ao marcar a caixa de seleção de concordância na tela de login e acessar o portal, você, na qualidade de associado titular, declara ter lido e aceito estes Termos para a sua conta. A inclusão de dependentes fundamenta-se na Execução do Estatuto Associativo (Art. 7º, V da LGPD) e no Legítimo Interesse para concessão de acesso ao clube (Art. 7º, IX). Dependentes maiores de idade são titulares autônomos de dados pessoais e possuem o direito de exercer seus direitos individualmente perante o DPO da AFEA."
                 )}
               </div>
             </div>
@@ -830,16 +831,16 @@ const App: React.FC = () => {
                 </div>
               </section>
 
-          {/* Section 4: Segurança da Informação */}
+          {/* Section 4: Segurança da Informação & Notificação de Incidentes (Art. 48 da LGPD) */}
           <section className="space-y-6">
             <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
               <div className="bg-teal-50 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm">4</div>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Segurança da Informação</h2>
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Segurança da Informação &amp; Notificação de Incidentes (Art. 48 da LGPD)</h2>
             </div>
 
                 <p className="text-slate-700 leading-relaxed text-sm">
                   {highlightText(
-                    "Adotamos medidas técnicas, administrativas e organizacionais para proteger seus dados pessoais contra acessos não autorizados, perda, destruição, vazamento ou alteração ilegal, incluindo:"
+                    "Adotamos medidas técnicas, administrativas e organizacionais robustas para proteger seus dados pessoais contra acessos não autorizados, perda, destruição, vazamento ou alteração ilegal, incluindo:"
                   )}
                 </p>
 
@@ -860,6 +861,19 @@ const App: React.FC = () => {
                     <Lock className="w-4 h-4 text-teal-600 shrink-0" />
                     <span>Bloqueio de logins simultâneos em aparelhos não autorizados</span>
                   </div>
+                </div>
+
+                {/* Notificação de Incidentes Box */}
+                <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 space-y-2 mt-4">
+                  <div className="flex items-center gap-2 text-teal-900 font-bold text-xs uppercase tracking-wider">
+                    <ShieldCheck className="w-4 h-4 text-teal-600" />
+                    <span>Protocolo de Notificação de Incidentes de Segurança (Art. 48 da LGPD)</span>
+                  </div>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    {highlightText(
+                      "Em conformidade com o Artigo 48 da LGPD, caso ocorra qualquer incidente de segurança relevante que possa acarretar risco ou dano significativo aos associados titulares ou seus dependentes (como acessos não autorizados ou vazamento de dados), a AFEA compromete-se a comunicar o evento formalmente à Autoridade Nacional de Proteção de Dados (ANPD) e aos titulares afetados em prazo razoável. A notificação informará a natureza dos dados afetados, a descrição dos riscos e as providências técnicas e administrativas adotadas para mitigar eventuais impactos."
+                    )}
+                  </p>
                 </div>
               </section>
 
@@ -925,15 +939,15 @@ const App: React.FC = () => {
             </p>
           </section>
 
-          {/* Section 7: Privacidade de Menores */}
+          {/* Section 7: Tratamento de Dados de Crianças e Adolescentes (Art. 14 da LGPD) */}
           <section className="space-y-4">
             <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
               <div className="bg-teal-50 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm">7</div>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Privacidade de Menores</h2>
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Tratamento de Dados de Crianças e Adolescentes (Art. 14 da LGPD)</h2>
             </div>
             <p className="text-slate-700 leading-relaxed text-sm">
               {highlightText(
-                "O login individual e acesso direto ao aplicativo é estritamente restrito a maiores de 12 anos de idade. Informações cadastrais de menores dependentes com faixa etária inferior são de responsabilidade do associado titular e já constam originalmente no cadastro do sistema administrativo principal para viabilizar o livre acesso e usufruto das dependências físicas da associação. Bloqueamos ativamente a criação de contas de acessos autônomas para essa faixa etária."
+                "O tratamento de dados pessoais de crianças e adolescentes no Portal e aplicativo da AFEA é realizado atendendo estritamente ao seu MELHOR INTERESSE (Art. 14, caput da LGPD). A coleta de informações cadastrais de menores dependentes (nome, data de nascimento e foto) restringe-se ao mínimo necessário para a identificação visual, segurança e controle de acesso às dependências físicas da associação e emissão da carteira digital familiar, ocorrendo mediante consentimento específico e em destaque fornecido pelo pai, mãe ou responsável legal (associado titular), em conformidade com o Art. 14, § 1º da LGPD. O acesso autônomo individual diretamente ao aplicativo é restrito a maiores de 12 anos."
               )}
             </p>
           </section>
